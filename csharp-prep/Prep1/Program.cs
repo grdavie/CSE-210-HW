@@ -6,7 +6,7 @@ class Program
     {
         Console.WriteLine("Hello Prep1 World!");
 
-        Console.Write("What is your last name? ");
+        Console.Write("What is your first name? ");
         string first_name = Console.ReadLine(); 
 
         Console.Write("What is your last name? ");
