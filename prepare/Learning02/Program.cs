@@ -26,5 +26,10 @@ class Program
         myResume._name = "Allison Rose";
         myResume.Display();
 
+        DateTime theCurrentTime = DateTime.Now;
+        string dateText = theCurrentTime.ToShortDateString();
+
+        Console.WriteLine(dateText);
+
     }
 }
