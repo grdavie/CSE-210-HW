@@ -7,20 +7,43 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("\nWelcome to the Journal Program!");
-        Console.WriteLine("\nPlease select one of the following choices: ");
-        Console.WriteLine("1.Write\n2.Display\n3.Load\n4.Save\n5.Quit");
-        Console.Write("What would you like to do? ");
-        int userChoice = int.Parse(Console.ReadLine());
-
-        //Console.WriteLine(userChoice);
         
+        int userChoice = -1;
+
+        while (userChoice!=5)
+
+        {
         
-        PromptGenerator journalPrompt = new PromptGenerator();
-        List<string> listOfPrompts = new List<string>();
+            Console.WriteLine("\nPlease select one of the following choices: ");
+            Console.WriteLine("1.Write\n2.Display\n3.Load\n4.Save\n5.Quit");
+            Console.Write("What would you like to do? ");
+            userChoice = int.Parse(Console.ReadLine());
 
-        listOfPrompts = journalPrompt._prompt;
+            //Console.WriteLine(userChoice);
+        
+            if (userChoice == 1)
+            {
+                PromptGenerator journalPrompt = new PromptGenerator();
+                List<string> listOfPrompts = new List<string>();
 
-        Console.WriteLine(journalPrompt.ReturnRandomPrompt(listOfPrompts));
+                listOfPrompts = journalPrompt._prompt;
+                string randomJournalPrompt = journalPrompt.ReturnRandomPrompt(listOfPrompts); 
+
+                Console.WriteLine(randomJournalPrompt);
+                Console.Write("> ");
+                string userInput = Console.ReadLine();
+
+                Entry journal1 = new Entry();
+                journal1._randomPrompt = randomJournalPrompt;
+                journal1._journalEntry = userInput;
+                journal1.DisplayEntry();
+
+
+            }
+        
+        }
+
+     
         
 
     }

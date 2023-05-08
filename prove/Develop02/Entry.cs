@@ -3,7 +3,7 @@ using System;
 public class Entry
 {
     public string _dateText = ReturnDateText();
-    public PromptGenerator _randomPrompt;
+    public string _randomPrompt;
     public string _journalEntry;
 
     public static string ReturnDateText()
