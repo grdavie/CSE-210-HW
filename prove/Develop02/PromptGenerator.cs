@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class PromptGenerator
 {
+    public List<string> _prompt = ReadfromFile();
 
     public static List<string> ReadfromFile()
     {
@@ -20,8 +21,7 @@ public class PromptGenerator
 
     }
 
-    public List<string> _prompt = ReadfromFile();
-
+    
     public string ReturnRandomPrompt(List<string> _prompt)
     {
         Random randNum = new Random();
