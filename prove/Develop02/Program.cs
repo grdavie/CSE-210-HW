@@ -10,7 +10,7 @@ class Program
         
         int userChoice = -1;
 
-        while (userChoice!=5)
+        while (userChoice!=5) //quits program if userChoice is 5
 
         {
         
