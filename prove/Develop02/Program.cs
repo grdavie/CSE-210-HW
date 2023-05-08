@@ -16,7 +16,7 @@ class Program
         
             Console.WriteLine("\nPlease select one of the following choices: ");
             Console.WriteLine("1.Write\n2.Display\n3.Load\n4.Save\n5.Quit");
-            Console.Write("What would you like to do? ");
+            Console.Write("\nWhat would you like to do? ");
             userChoice = int.Parse(Console.ReadLine());
 
             //Console.WriteLine(userChoice);
@@ -29,7 +29,7 @@ class Program
                 listOfPrompts = journalPrompt._prompt;
                 string randomJournalPrompt = journalPrompt.ReturnRandomPrompt(listOfPrompts); 
 
-                Console.WriteLine(randomJournalPrompt);
+                Console.WriteLine($"\n{randomJournalPrompt}");
                 Console.Write("> ");
                 string userInput = Console.ReadLine();
 
