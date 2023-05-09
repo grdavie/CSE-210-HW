@@ -33,13 +33,32 @@ class Program
                 Console.Write("> ");
                 string userInput = Console.ReadLine();
 
-                Entry journal1 = new Entry();
-                journal1._randomPrompt = randomJournalPrompt;
-                journal1._journalEntry = userInput;
-                journal1.DisplayEntry();
+                Entry entry1 = new Entry();
+                entry1._randomPrompt = randomJournalPrompt;
+                entry1._journalEntry = userInput;
+                //journal1.DisplayEntry();
+
+                Journal journalList = new Journal();
+                List<Entry> listofEntries = new List<Entry>();
+
+                listofEntries = journalList._entries;
+                journalList._newEntry = entry1;
+                journalList.AddEntry(listofEntries, journalList._newEntry);
+                journalList.DisplayEntries(listofEntries);
+
+                journalList.SaveFile(listofEntries);
+
+                journalList.LoadFile();
+
+               
 
 
             }
+
+            //else if (userChoice == 2)
+            //{
+                //journalList.DisplayEntries(journalList._entries);
+            //}
         
         }
 
