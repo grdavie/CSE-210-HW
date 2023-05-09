@@ -1,2 +1,2 @@
-Date: 5/9/2023 - Prompt: What was the weather like today?
-it was really cold today. woke up it was 5c!
+Date: 5/9/2023 - Prompt: What am I nervous or anxious about today?
+i'm nervous that my program will fail as a whole

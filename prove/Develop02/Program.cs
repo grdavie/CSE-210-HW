@@ -60,7 +60,7 @@ class Program
                 //journalList.DisplayEntries(journalList._entries);
             //}
 
-            //not pushing to github??
+            
             
         
         }

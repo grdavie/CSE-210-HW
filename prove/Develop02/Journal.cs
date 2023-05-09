@@ -57,6 +57,6 @@ public class Journal
         return previousEntries;
     }
 
-    //not pushing to github?
+    
 
 }
