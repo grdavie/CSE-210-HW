@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 public class PromptGenerator
 {
-    public List<string> _prompt = ReadfromFile(); //the list that was returned by the ReadFromFile() method
+    public List<string> _prompt = ReadfromFile(); //the list that was returned by the ReadFromFile() method when the PromptGenerator is instantiated gets assigned as the value for this attribute
     
 
     public static List<string> ReadfromFile() //reads the prompts from the text file and returns it as a list
     {
         List<string> prompts = new List<string>();
-        string filename = "prompts.txt";
+        string filename = "prompts.txt"; //text file that stores all the prompts 
 
-        string[] lines = System.IO.File.ReadAllLines(filename);
+        string[] lines = System.IO.File.ReadAllLines(filename); //file is read as an array of strings (one per line)
 
         foreach (string line in lines)
         {
-            prompts.Add(line);
+            prompts.Add(line); //each line is added to the list of prompts
         }
 
         return prompts;
