@@ -6,6 +6,11 @@ class Program
 {
     static void Main(string[] args)
     {
+        
+        Journal journalList = new Journal();
+        List<Entry> listofEntries = new List<Entry>();
+        listofEntries = journalList._entries;
+        
         Console.WriteLine("\nWelcome to the Journal Program!");
         
         int userChoice = -1;
@@ -38,10 +43,9 @@ class Program
                 entry1._journalEntry = userInput;
                 //journal1.DisplayEntry();
 
-                Journal journalList = new Journal();
-                List<Entry> listofEntries = new List<Entry>();
+                
 
-                listofEntries = journalList._entries;
+                
                 journalList._newEntry = entry1;
                 journalList.AddEntry(listofEntries, journalList._newEntry);
                 journalList.DisplayEntries(listofEntries);
@@ -55,10 +59,10 @@ class Program
 
             }
 
-            //else if (userChoice == 2)
-            //{
-                //journalList.DisplayEntries(journalList._entries);
-            //}
+            else if (userChoice == 2)
+            {
+                journalList.DisplayEntries(journalList._entries);
+            }
 
             
             
