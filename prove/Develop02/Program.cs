@@ -7,9 +7,9 @@ class Program
     static void Main(string[] args)
     {
         
-        Journal journalList = new Journal();
+        Journal journal = new Journal(); //creating an instance of 
         List<Entry> listofEntries = new List<Entry>();
-        listofEntries = journalList._entries;
+        listofEntries = journal._entries;
         
         Console.WriteLine("\nWelcome to the Journal Program!");
         
@@ -26,42 +26,49 @@ class Program
 
             //Console.WriteLine(userChoice);
         
-            if (userChoice == 1)
+            if (userChoice == 1) //Write
             {
-                PromptGenerator journalPrompt = new PromptGenerator();
-                List<string> listOfPrompts = new List<string>();
+                PromptGenerator promptgenerator = new PromptGenerator(); //PromptGenerator object created
+                List<string> listOfPrompts = new List<string>(); //create a new list to hold the list of prompts inside the main program
 
-                listOfPrompts = journalPrompt._prompt;
-                string randomJournalPrompt = journalPrompt.ReturnRandomPrompt(listOfPrompts); 
+                listOfPrompts = promptgenerator._prompt;
+                string randomJournalPrompt = promptgenerator.ReturnRandomPrompt(listOfPrompts); 
 
                 Console.WriteLine($"\n{randomJournalPrompt}");
                 Console.Write("> ");
                 string userInput = Console.ReadLine();
 
-                Entry entry1 = new Entry();
-                entry1._randomPrompt = randomJournalPrompt;
-                entry1._journalEntry = userInput;
-                //journal1.DisplayEntry();
-
+                Entry entry = new Entry();
+                entry._randomPrompt = randomJournalPrompt;
+                entry._journalEntry = userInput;
+                
+                //Add entry object to the journal object's list of Entry objects (i.e listOfEntries)   
+                journal._newEntry = entry;
+                journal.AddEntry(listofEntries, journal._newEntry);
                 
 
                 
-                journalList._newEntry = entry1;
-                journalList.AddEntry(listofEntries, journalList._newEntry);
-                journalList.DisplayEntries(listofEntries);
-
-                journalList.SaveFile(listofEntries);
-
-                journalList.LoadFile();
-
-               
-
-
             }
 
-            else if (userChoice == 2)
+            else if (userChoice == 2) //Display
             {
-                journalList.DisplayEntries(journalList._entries);
+                journal.DisplayEntries(listofEntries);
+            }
+
+            else if (userChoice == 3) //Load
+            {
+                journal.LoadFile();
+            }
+
+            else if (userChoice == 4) //Save
+            {
+                journal.SaveFile(listofEntries);
+            }
+
+            else if (userChoice < 1 || userChoice > 5) //invalid input
+            {
+                Console.WriteLine("You have entered an invalid option.");
+                Console.WriteLine("Please choose between 1-5 only. Thank you!");
             }
 
             
