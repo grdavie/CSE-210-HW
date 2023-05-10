@@ -6,7 +6,6 @@ public class Journal
 {
     public List<Entry> _entries = new List<Entry>(); //a new list of Entry objects
     public Entry _newEntry; //Entry object created should be assigned as the value for this attribute
-    //public List<Entry> _previousEntries = LoadFile(); //list of all previously saved Entry objects loaded from file
     
 
     public void AddEntry(List<Entry> _entries, Entry _newEntry) //takes the list of Entry objects and an Entry object as parameters 
@@ -33,7 +32,7 @@ public class Journal
         {
             foreach (Entry entry in _entries) //iterate through the list of Entry objects and store each attribute on the file created
             {
-                outputFile.WriteLine($"{entry._dateText}~~{entry._randomPrompt}~~{entry._journalEntry}");
+                outputFile.WriteLine($"{entry._dateText}~~{entry._randomPrompt}~~{entry._journalEntry}"); //format that makes it easy to split later on
                 
             }
         }

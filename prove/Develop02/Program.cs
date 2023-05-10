@@ -11,7 +11,7 @@ class Program
         List<Entry> listOfEntries = new List<Entry>();
         listOfEntries = journal._entries;
 
-        List<Entry> listOfPreviousEntries = new List<Entry>();
+        List<Entry> listOfPreviousEntries = new List<Entry>(); //created a new list to hold all the saved Entry objects loaded from file
         
         Console.WriteLine("\nWelcome to the Journal Program!");
         
