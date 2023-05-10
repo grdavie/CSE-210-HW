@@ -17,7 +17,6 @@ public class Entry
     public void DisplayEntry() //displays the date text, the random prompt generared, and the user input
     {
         Console.WriteLine($"Date: {_dateText} - Prompt: {_randomPrompt}");
-        Console.WriteLine();
         Console.WriteLine($"> {_journalEntry}\n");
     }
 

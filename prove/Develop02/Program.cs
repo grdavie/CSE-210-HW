@@ -8,8 +8,10 @@ class Program
     {
         
         Journal journal = new Journal(); //creating an instance of 
-        List<Entry> listofEntries = new List<Entry>();
-        listofEntries = journal._entries;
+        List<Entry> listOfEntries = new List<Entry>();
+        listOfEntries = journal._entries;
+
+        List<Entry> listOfPreviousEntries = new List<Entry>();
         
         Console.WriteLine("\nWelcome to the Journal Program!");
         
@@ -44,7 +46,7 @@ class Program
                 
                 //Add entry object to the journal object's list of Entry objects (i.e listOfEntries)   
                 journal._newEntry = entry;
-                journal.AddEntry(listofEntries, journal._newEntry);
+                journal.AddEntry(listOfEntries, journal._newEntry);
                 
 
                 
@@ -52,17 +54,20 @@ class Program
 
             else if (userChoice == 2) //Display
             {
-                journal.DisplayEntries(listofEntries);
+                journal.DisplayEntries(listOfEntries);
             }
 
             else if (userChoice == 3) //Load
             {
-                journal.LoadFile();
+                
+                listOfPreviousEntries = journal.LoadFile();
+                listOfEntries = listOfPreviousEntries;
+                
             }
 
             else if (userChoice == 4) //Save
             {
-                journal.SaveFile(listofEntries);
+                journal.SaveFile(listOfEntries);
             }
 
             else if (userChoice < 1 || userChoice > 5) //invalid input

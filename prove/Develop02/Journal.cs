@@ -6,6 +6,7 @@ public class Journal
 {
     public List<Entry> _entries = new List<Entry>(); //a new list of Entry objects
     public Entry _newEntry; //Entry object created should be assigned as the value for this attribute
+    //public List<Entry> _previousEntries = LoadFile(); //list of all previously saved Entry objects loaded from file
     
 
     public void AddEntry(List<Entry> _entries, Entry _newEntry) //takes the list of Entry objects and an Entry object as parameters 
@@ -26,39 +27,49 @@ public class Journal
         
         Console.Write("What is the filename? ");
         string filename = Console.ReadLine(); //user input filename.type
-        Console.WriteLine($"Saving {filename} file...");
+        Console.WriteLine($"Your file {filename} was saved successfully!");
 
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            foreach (Entry entry in _entries) //iterate through the list of Entry objects and call its attributes to store on the file created
+            foreach (Entry entry in _entries) //iterate through the list of Entry objects and store each attribute on the file created
             {
-                outputFile.WriteLine($"Date: {entry._dateText} - Prompt: {entry._randomPrompt}");
-                outputFile.WriteLine();
-                outputFile.WriteLine($"> {entry._journalEntry}\n");
+                outputFile.WriteLine($"{entry._dateText}~~{entry._randomPrompt}~~{entry._journalEntry}");
                 
             }
         }
 
     }
 
-    public List<Entry> LoadFile() //creates and returns a new list of Entry objects that stores all of the lines inside of the file created from SaveFile method
+    public  List<Entry> LoadFile() //creates and returns a new list of Entry objects that stores all of the lines inside of the file created from SaveFile method
     {
-        List<Entry> previousEntries = new List<Entry>();
-        
-        
+        List<Entry> savedEntries = new List<Entry>();
+         
         Console.Write("What is the filename? ");
         string filename = Console.ReadLine(); //user input filename.type
-        Console.WriteLine($"Loading {filename} file...");
+        Console.WriteLine($"Your file {filename} was loaded successfully!");
 
         string [] lines = System.IO.File.ReadAllLines(filename);
 
         foreach (string line in lines)
         {
-            Console.WriteLine(line); //display all the lines stored inside the file
+            //each line on the file will look like this {date}~~{random prompt}~~{user journal input}
+
+            string[] parts = line.Split("~~");
+            
+            //parts[0] - date
+            //parts[1] - random prompt
+            //parts[2] - user journal input
+
+            Entry newEntry = new Entry();
+            newEntry._dateText = parts[0];
+            newEntry._randomPrompt = parts[1];
+            newEntry._journalEntry = parts[2];
+
+            savedEntries.Add(newEntry);
     
         }
 
-        return previousEntries;
+        return savedEntries;
     }
 
     
