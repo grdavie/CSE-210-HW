@@ -9,11 +9,17 @@ class Program
         
         Journal journal = new Journal(); //creating an instance of 
         List<Entry> listOfEntries = new List<Entry>();
-        listOfEntries = journal._entries;
+        listOfEntries = journal._entries; //current list of Entry objects
 
+        
+        //For Loading Files:
         List<Entry> listOfPreviousEntries = new List<Entry>(); //created a new list to hold all the saved Entry objects loaded from file
         
-        Console.WriteLine("\nWelcome to the Journal Program!");
+        
+        //Welcome Message
+        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine("Welcome to the Journal Program!");
+        Console.WriteLine("--------------------------------------------");
         
         int userChoice = -1;
 
@@ -36,10 +42,12 @@ class Program
                 listOfPrompts = promptgenerator._prompt;
                 string randomJournalPrompt = promptgenerator.ReturnRandomPrompt(listOfPrompts); 
 
+                //Display Random Prompt
                 Console.WriteLine($"\n{randomJournalPrompt}");
                 Console.Write("> ");
                 string userInput = Console.ReadLine();
 
+                //store random prompt and user input into the Entry object
                 Entry entry = new Entry();
                 entry._randomPrompt = randomJournalPrompt;
                 entry._journalEntry = userInput;
@@ -54,20 +62,20 @@ class Program
 
             else if (userChoice == 2) //Display
             {
-                journal.DisplayEntries(listOfEntries);
+                journal.DisplayEntries(listOfEntries); //displays current list of entries
             }
 
             else if (userChoice == 3) //Load
             {
                 
                 listOfPreviousEntries = journal.LoadFile();
-                listOfEntries = listOfPreviousEntries;
+                listOfEntries = listOfPreviousEntries; //replace the current list of entries with the previous list of entries
                 
             }
 
             else if (userChoice == 4) //Save
             {
-                journal.SaveFile(listOfEntries);
+                journal.SaveFile(listOfEntries); //saves the current list of entries
             }
 
             else if (userChoice < 1 || userChoice > 5) //invalid input
@@ -81,6 +89,9 @@ class Program
         
         }
 
+        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine("Thank you and Good Bye!");
+        Console.WriteLine("--------------------------------------------\n");
      
         
 

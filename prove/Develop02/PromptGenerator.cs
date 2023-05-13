@@ -5,7 +5,6 @@ public class PromptGenerator
 {
     public List<string> _prompt = ReadfromFile(); //the list that was returned by the ReadFromFile() method when the PromptGenerator is instantiated gets assigned as the value for this attribute
     
-
     public static List<string> ReadfromFile() //reads the prompts from the text file and returns it as a list
     {
         List<string> prompts = new List<string>();
@@ -22,7 +21,7 @@ public class PromptGenerator
 
     }
 
-    
+
     public string ReturnRandomPrompt(List<string> _prompt) //takes in the list of prompts as its parameter to return a random prompt string
     {
         Random randNum = new Random();

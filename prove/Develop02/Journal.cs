@@ -31,7 +31,7 @@ public class Journal
         if (File.Exists(filename)) //confirm if user wants to overwrite existing file
 
         {
-            Console.WriteLine("\nFile already exists!")
+            Console.WriteLine("\nFile already exists!");
             Console.Write($"Are you sure you want to overwrite {filename}? Enter (y) to continue, any key to cancel : ");
             string userInput = Console.ReadLine().ToLower(); //will work whether upper case Y or lowercase y is used
         
