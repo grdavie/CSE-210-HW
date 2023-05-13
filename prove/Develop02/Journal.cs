@@ -27,15 +27,50 @@ public class Journal
         
         Console.Write("What is the filename? ");
         string filename = Console.ReadLine(); //user input filename.type
-        Console.WriteLine($"Your file {filename} was saved successfully!");
+        
+        if (File.Exists(filename)) //confirm if user wants to overwrite existing file
 
-        using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            foreach (Entry entry in _entries) //iterate through the list of Entry objects and store each attribute on the file created
+            Console.WriteLine("\nFile already exists!")
+            Console.Write($"Are you sure you want to overwrite {filename}? Enter (y) to continue, any key to cancel : ");
+            string userInput = Console.ReadLine().ToLower(); //will work whether upper case Y or lowercase y is used
+        
+            if (userInput == "y")
+
             {
-                outputFile.WriteLine($"{entry._dateText}~~{entry._randomPrompt}~~{entry._journalEntry}"); //format that makes it easy to split later on
-                
+                Console.WriteLine($"Your file {filename} was saved successfully!");
+
+                using (StreamWriter outputFile = new StreamWriter(filename))
+                {
+                    foreach (Entry entry in _entries) //iterate through the list of Entry objects and store each attribute on the file created
+                    {
+                        outputFile.WriteLine($"{entry._dateText}~~{entry._randomPrompt}~~{entry._journalEntry}"); //format that makes it easy to split later on
+
+                    }
+                }
             }
+
+            else 
+
+            {
+                Console.WriteLine("File not saved.");
+            }
+
+
+        }
+
+        else //if file doesn't exist, save new file automatically
+        {
+            Console.WriteLine($"Your file {filename} was saved successfully!");
+
+                using (StreamWriter outputFile = new StreamWriter(filename))
+                {
+                    foreach (Entry entry in _entries) //iterate through the list of Entry objects and store each attribute on the file created
+                    {
+                        outputFile.WriteLine($"{entry._dateText}~~{entry._randomPrompt}~~{entry._journalEntry}"); //format that makes it easy to split later on
+
+                    }
+                }
         }
 
     }
