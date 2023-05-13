@@ -23,12 +23,12 @@ class Program
         
         int userChoice = -1;
 
-        while (userChoice!=5) //quits program if userChoice is 5
+        while (userChoice!=6) //quits program if userChoice is 5
 
         {
         
             Console.WriteLine("\nPlease select one of the following choices: ");
-            Console.WriteLine("1.Write\n2.Display\n3.Load\n4.Save\n5.Quit");
+            Console.WriteLine("1.Write\n2.Display\n3.Edit\n4.Load\n5.Save\n6.Quit");
             Console.Write("\nWhat would you like to do? ");
             userChoice = int.Parse(Console.ReadLine());
 
@@ -65,7 +65,12 @@ class Program
                 journal.DisplayEntries(listOfEntries); //displays current list of entries
             }
 
-            else if (userChoice == 3) //Load
+            else if (userChoice == 3) //Edit Entry
+            {
+                journal.EditEntry(listOfEntries);
+            }
+
+            else if (userChoice == 4) //Load
             {
                 
                 listOfPreviousEntries = journal.LoadFile();
@@ -73,12 +78,12 @@ class Program
                 
             }
 
-            else if (userChoice == 4) //Save
+            else if (userChoice == 5) //Save
             {
                 journal.SaveFile(listOfEntries); //saves the current list of entries
             }
 
-            else if (userChoice < 1 || userChoice > 5) //invalid input
+            else if (userChoice < 1 || userChoice > 6) //invalid input
             {
                 Console.WriteLine("You have entered an invalid option.");
                 Console.WriteLine("Please choose between 1-5 only. Thank you!");

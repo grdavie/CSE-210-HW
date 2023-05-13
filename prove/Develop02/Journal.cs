@@ -18,7 +18,46 @@ public class Journal
     {
         foreach (Entry entry in _entries) //iterate through the list of Entry objects to display all entries added to it
         {
+            int index = _entries.IndexOf(entry); //returns the 0 based index number of each Entry object in the list
+            int logNumber = index + 1; //starts the entry count from 1 instead of 0
+
+            Console.WriteLine($"Journal Entry #{logNumber}");
             entry.DisplayEntry();
+        }
+    }
+
+    public void EditEntry (List<Entry> _entries)
+    {
+        Console.Write("Which entry do you want to edit? ");
+        int logNumber = int.Parse(Console.ReadLine());
+        int index = logNumber - 1; //turn the entry object's logNumber to its 0 based index 
+
+        Console.WriteLine("\nPlease select one of the following choices: \n1. Update journal entry \n2. Delete journal entry");
+        Console.Write("\nWhat would you like to do? ");
+        int userEditChoice = int.Parse(Console.ReadLine()); 
+
+        if (userEditChoice == 1)
+        {
+            Console.WriteLine($"{_entries[index]._randomPrompt}");
+            Console.Write("> ");
+            string newInput = Console.ReadLine();
+            
+            _entries[index]._journalEntry = newInput;
+
+            Console.WriteLine("\nYour Journal Entry has been updated!");
+        }
+
+        else if (userEditChoice == 2)
+        {
+            _entries.RemoveAt(index); //removes the Entry object from the list
+
+            Console.WriteLine("Your Journal Entry has been deleted!");
+        }
+
+        else
+        {
+            Console.WriteLine("You have entered an invalid option.");
+            Console.WriteLine("Editing has been cancelled. Please try again.");
         }
     }
 
