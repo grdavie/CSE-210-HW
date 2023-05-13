@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 public class Journal
 {
     public List<Entry> _entries = new List<Entry>(); //a new list of Entry objects
@@ -39,36 +40,52 @@ public class Journal
 
     }
 
-    public  List<Entry> LoadFile() //creates and returns a new list of Entry objects that stores all of the lines inside of the file created from SaveFile method
+    public List<Entry> LoadFile() //creates and returns a new list of Entry objects that stores all of the lines inside of the file created from SaveFile method
     {
         List<Entry> savedEntries = new List<Entry>();
          
         Console.Write("What is the filename? ");
         string filename = Console.ReadLine(); //user input filename.type
-        Console.WriteLine($"Your file {filename} was loaded successfully!");
+       
 
-        string [] lines = System.IO.File.ReadAllLines(filename);
-
-        foreach (string line in lines)
+        if (File.Exists(filename)) //Load successfully if file exists
         {
-            //each line on the file will look like this {date}~~{random prompt}~~{user journal input}
+        
+            Console.WriteLine();
+            Console.WriteLine($"Your file {filename} was loaded successfully!");
 
-            string[] parts = line.Split("~~");
+            string [] lines = System.IO.File.ReadAllLines(filename);
+
+            foreach (string line in lines)
+            {
+                //each line on the file will look like this {date}~~{random prompt}~~{user journal input}
+
+                string[] parts = line.Split("~~");
             
-            //parts[0] - date
-            //parts[1] - random prompt
-            //parts[2] - user journal input
+                //parts[0] - date
+                //parts[1] - random prompt
+                //parts[2] - user journal input
 
-            Entry newEntry = new Entry();
-            newEntry._dateText = parts[0];
-            newEntry._randomPrompt = parts[1];
-            newEntry._journalEntry = parts[2];
+                Entry newEntry = new Entry();
+                newEntry._dateText = parts[0];
+                newEntry._randomPrompt = parts[1];
+                newEntry._journalEntry = parts[2];
 
-            savedEntries.Add(newEntry);
+                savedEntries.Add(newEntry);
     
+            }
+
+            return savedEntries; //returns list of previously saved entries as new Entry objects
+
         }
 
-        return savedEntries;
+        else //handle file doesn't exist error so program doesn't crash
+        {
+            Console.WriteLine("\nERROR!");
+            Console.WriteLine("File doesn't exist. Please create it or load a different file");
+
+            return savedEntries; //returns nothing
+        }
     }
 
     
