@@ -36,7 +36,7 @@ public class Journal
         Console.Write("\nWhat would you like to do? ");
         int userEditChoice = int.Parse(Console.ReadLine()); 
 
-        if (userEditChoice == 1)
+        if (userEditChoice == 1) //update journal entry
         {
             Console.WriteLine($"{_entries[index]._randomPrompt}");
             Console.Write("> ");
@@ -54,7 +54,7 @@ public class Journal
             Console.WriteLine("Your Journal Entry has been deleted!");
         }
 
-        else
+        else //so it doesn't crash?
         {
             Console.WriteLine("You have entered an invalid option.");
             Console.WriteLine("Editing has been cancelled. Please try again.");
