@@ -23,7 +23,7 @@ class Program
         
         int userChoice = -1;
 
-        while (userChoice!=6) //quits program if userChoice is 5
+        while (userChoice!=6) //quits program if userChoice is 6
 
         {
         
