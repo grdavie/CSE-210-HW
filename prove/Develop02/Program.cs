@@ -65,7 +65,7 @@ class Program
                 journal.DisplayEntries(listOfEntries); //displays current list of entries
             }
 
-            else if (userChoice == 3) //Edit Entry
+            else if (userChoice == 3) //Edit Entry - allows user to modify their journal entry response or delete it altogether
             {
                 journal.EditEntry(listOfEntries);
             }
