@@ -51,7 +51,7 @@ public class Fraction
     //Method to display attributes as fraction string
     public string GetFractionString()
     {
-        string fraction = _top + "/" + _bottom;
+        string fraction = _top + "/" + _bottom; 
         
         return fraction;
     }
