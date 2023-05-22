@@ -24,22 +24,22 @@ public class Reference
 
     public string GetReferenceString()
     {
+        string reference = "";
+        
         if (_endVerse == null) //single verse (e.g. John 3:16)
         {
             
-            string reference = _book + " " + _chapter + ":" + _verse; 
-
-            return reference;
+            reference = _book + " " + _chapter + ":" + _verse; 
                     
         }
 
         else //multiple verse (e.g. Proverbs 3:5-6)
         {
-            string reference = _book + " " + _chapter + ":" + _verse + "-" + _endVerse; 
-
-            return reference;
+            reference = _book + " " + _chapter + ":" + _verse + "-" + _endVerse; 
+     
         }
 
+        return reference;
 
     }
 }
