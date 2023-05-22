@@ -37,13 +37,13 @@ public class Word
             
             string hiddenWord = ""; //empty string
 
-            foreach (char c in _word) //iterate through the characters in the word string
+            foreach (char letter in _word) //iterate through each letter or "char" in the word string
 
             {
-                hiddenWord += "_"; //for every character or letter, append an "_" to the hiddenWord string
+                hiddenWord += "_"; //for every letter, append an "_" to the hiddenWord string
             }
 
-            return hiddenWord; //hiddenWord should now be a string of underscores equal to the word count
+            return hiddenWord; //hiddenWord should now be a string of underscores equal to the word length or letter count.
 
 
         }
