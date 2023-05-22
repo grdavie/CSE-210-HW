@@ -26,13 +26,20 @@ public class Reference
     {
         if (_endVerse == null) //single verse (e.g. John 3:16)
         {
-            return _book + " " + _chapter + ":" + _verse;        
+            
+            string reference = _book + " " + _chapter + ":" + _verse; 
+
+            return reference;
+                    
         }
 
         else //multiple verse (e.g. Proverbs 3:5-6)
         {
-            return _book + " " + _chapter + ":" + _verse + "-" + _endVerse; 
+            string reference = _book + " " + _chapter + ":" + _verse + "-" + _endVerse; 
+
+            return reference;
         }
+
 
     }
 }
