@@ -3,24 +3,24 @@ using System;
 public class Word 
 {
     private string _word;
-    private bool _hidden;
+    private bool _hidden; //word visibility
 
     public Word (string word)
     {
         _word = word;
     }
 
-    public void Hide()
+    public void Hide() //set visibility to hide word
     {
         _hidden = true;
     }
 
-    public void Show()
+    public void Show() //set visibility to show word
     {
         _hidden = false;
     }
 
-    public bool IsHidden()
+    public bool IsHidden() //return visibility status
     {
         return _hidden;
     }
