@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
@@ -26,6 +27,13 @@ class Program
         Console.WriteLine(w2.GetRenderedText());
         w2.Show();
         Console.WriteLine(w2.GetRenderedText());
+
+        //scripture class testing
+        string scriptureSample = "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.";
+
+        Scripture s1 = new Scripture(r1, scriptureSample);
+        Console.WriteLine(s1.GetRenderedText());
+
 
     }
 }
