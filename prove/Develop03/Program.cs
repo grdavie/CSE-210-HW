@@ -33,6 +33,10 @@ class Program
 
         Scripture s1 = new Scripture(r1, scriptureSample);
         Console.WriteLine(s1.GetRenderedText());
+        Console.WriteLine(s1.IsCompletelyHidden());
+        s1.HideWords();
+        Console.WriteLine(s1.GetRenderedText());
+        Console.WriteLine(s1.IsCompletelyHidden());
 
 
     }

@@ -21,7 +21,7 @@ public class Scripture
         foreach (string word in words)
         {
             Word newWord = new Word(word);
-            newWord.Show();
+            newWord.Show(); //set visibility of each word to not hidden
 
             listOfWords.Add(newWord);
         }
@@ -44,6 +44,31 @@ public class Scripture
         return renderedText;
     }
 
+    public void HideWords() //MODFIY!!
+    {
+        foreach (Word word in _listOfWords)
+        {
+            word.Hide();
+        }
+    }
 
+    public bool IsCompletelyHidden()
+    {
+        foreach (Word word in _listOfWords)
+        {
+            if (word.IsHidden() == false)
+            {
+                _completelyHidden = false;
+
+            }
+
+            else
+            {
+                _completelyHidden = true;
+            }
+        }
+
+        return _completelyHidden;
+    }
 
 }
