@@ -7,6 +7,7 @@ public class Scripture
     private string _scriptureText;
     private List<Word> _listOfWords;
     private bool _completelyHidden;
+    private List<int> _listOfIndex;
 
     public Scripture(Reference reference, string scriptureText)
     {
@@ -27,6 +28,9 @@ public class Scripture
         }
 
         _listOfWords = listOfWords;
+
+        List<int> listOfIndex = new List<int>();
+        _listOfIndex = listOfIndex;
         
     }
 
@@ -46,10 +50,28 @@ public class Scripture
 
     public void HideWords() //MODFIY!!
     {
-        foreach (Word word in _listOfWords)
+
+        int randomIndex = GetRandomIndex();
+        
+        while (_listOfIndex.Contains(randomIndex))
         {
-            word.Hide();
+           randomIndex = GetRandomIndex();
         }
+
+        _listOfIndex.Add(randomIndex);
+
+        _listOfWords[randomIndex].Hide();
+          
+    }
+
+    private int GetRandomIndex()
+    {
+        Random randNum = new Random();
+
+        int randIndex =  randNum.Next(0, _listOfWords.Count);
+
+        return randIndex;
+
     }
 
     public bool IsCompletelyHidden()
