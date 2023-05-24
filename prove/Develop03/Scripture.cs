@@ -24,12 +24,12 @@ public class Scripture
             Word newWord = new Word(word);
             newWord.Show(); //set visibility of each word to not hidden
 
-            listOfWords.Add(newWord);
+            listOfWords.Add(newWord); //add word objects to list of words
         }
 
-        _listOfWords = listOfWords;
+        _listOfWords = listOfWords; 
 
-        List<int> listOfIndex = new List<int>();
+        List<int> listOfIndex = new List<int>(); //create an empty list to store index numbers for later
         _listOfIndex = listOfIndex;
         
     }
@@ -92,5 +92,12 @@ public class Scripture
 
         return _completelyHidden;
     }
+
+    //public int GetListCount()
+    //{
+   //    int listOfIndexCount = _listOfIndex.Count;
+//
+    //    return listOfIndexCount;
+   // }
 
 }

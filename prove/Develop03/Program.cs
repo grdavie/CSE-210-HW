@@ -18,30 +18,54 @@ class Program
         //create Scripture class
         Scripture scripture = new Scripture(reference, scriptureText);
         bool isTextHidden = scripture.IsCompletelyHidden(); //true = hidden, false = visible
-        Console.WriteLine(scripture.GetRenderedText());
+        Console.WriteLine(scripture.GetRenderedText()); //display scripture with no hidden words
+        //int indexCount = scripture.GetListCount();
 
         Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
         
         
-        while (isTextHidden == false)
+        while (isTextHidden == false) //while word._hidden for every object in the word list is not all true, loop
         {
             ConsoleKeyInfo pressedKey = Console.ReadKey();
     
             if (pressedKey.Key == ConsoleKey.Enter)
             {
+                
+                //if (indexCount % 3 == 0)
+                //{
                 scripture.HideWords();
                 scripture.HideWords();
-                scripture.HideWords();
+                scripture.HideWords();  //hide three unique words at a time
 
-                Console.Clear();
+                Console.Clear(); //clear the console to reprint everything
 
                 Console.WriteLine("--------------------------------------------");
                 Console.WriteLine("Welcome to the Scripture Memoriser Program");
                 Console.WriteLine("--------------------------------------------\n");
 
-                Console.WriteLine(scripture.GetRenderedText()); 
+                Console.WriteLine(scripture.GetRenderedText()); //replace console text with the updated scripture with hidden words
 
                 Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
+
+                    //indexCount = scripture.GetListCount();
+
+                //}
+
+                //else
+                //{
+                //    scripture.HideWords();
+
+                //    Console.Clear();
+//
+                //    Console.WriteLine("--------------------------------------------");
+                //    Console.WriteLine("Welcome to the Scripture Memoriser Program");
+                //    Console.WriteLine("--------------------------------------------\n");
+
+                //    Console.WriteLine(scripture.GetRenderedText()); 
+
+                //    Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
+
+                //}
 
             }
 
