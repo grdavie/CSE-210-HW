@@ -21,12 +21,12 @@ class Program
         Console.WriteLine(scripture.GetRenderedText());
 
         Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
-
+        
         
         while (isTextHidden == false)
         {
             ConsoleKeyInfo pressedKey = Console.ReadKey();
-
+    
             if (pressedKey.Key == ConsoleKey.Enter)
             {
                 scripture.HideWords();
@@ -52,7 +52,7 @@ class Program
 
         }
 
-        Console.WriteLine("\nThank you and Good Bye!\n");
+        Console.WriteLine("\nGood Bye!\n");
 
         
 
