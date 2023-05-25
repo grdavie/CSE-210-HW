@@ -98,7 +98,7 @@ public class Scripture
         return _listOfIndex.Count;
     }
 
-    public int GetWordObjectCount() //return the object count for the word list of number of word objects inside the list
+    public int GetWordObjectCount() //return the object count for the word list or number of word objects inside the list
     {
         return _listOfWords.Count;
     }

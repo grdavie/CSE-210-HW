@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
+
 class Program
 {
     static void Main(string[] args)
     {
-        Console.Clear();
         
         Console.WriteLine("--------------------------------------------");
         Console.WriteLine("Welcome to the Scripture Memoriser Program");
@@ -30,16 +30,18 @@ class Program
         {
             ConsoleKeyInfo pressedKey = Console.ReadKey(true);
             int indexCount = scripture.GetIndexCount(); //initial indexCount will be 0
-            int wordObjectCount = scripture.GetWordObjectCount();
+            int wordObjectCount = scripture.GetWordObjectCount(); //number of word objects inside my list of word objects
     
-            if (pressedKey.Key == ConsoleKey.Enter)
+            if (pressedKey.Key == ConsoleKey.Enter) 
             {
                 
+                //hide three unique words at a time
                 scripture.HideWords();
                 scripture.HideWords();
-                scripture.HideWords();  //hide three unique words at a time
+                scripture.HideWords();  
 
-                indexCount = scripture.GetIndexCount(); //increase the indexCount value by 3 each loop
+                //updates or increases the indexCount value by 3 each loop
+                indexCount = scripture.GetIndexCount(); 
 
                 Console.Clear(); //clear the console to reprint everything
 
@@ -47,15 +49,17 @@ class Program
                 Console.WriteLine("Welcome to the Scripture Memoriser Program");
                 Console.WriteLine("--------------------------------------------\n");
 
-                Console.WriteLine(scripture.GetRenderedText()); //replace console text with the updated scripture with hidden words
+                
+                //replace console text with the updated scripture with hidden words
+                Console.WriteLine(scripture.GetRenderedText()); 
 
                 Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
 
-                //isTextHidden = scripture.IsCompletelyHidden();
 
             }
             
-            //additional argument to handle last round if there are 2 words left
+            //additional argument to handle last round if there will be 2 leftover words
+            //last 5 words will disappear at the same time
             if ((pressedKey.Key == ConsoleKey.Enter) && (wordObjectCount - indexCount == 2)) 
             {
                 scripture.HideWords();
@@ -67,15 +71,17 @@ class Program
                 Console.WriteLine("Welcome to the Scripture Memoriser Program");
                 Console.WriteLine("--------------------------------------------\n");
 
-                Console.WriteLine(scripture.GetRenderedText()); //replace console text with the updated scripture with hidden words
+                //replace console text with the updated scripture with hidden words
+                Console.WriteLine(scripture.GetRenderedText()); 
 
                 Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
 
-                isTextHidden = scripture.IsCompletelyHidden();
+                isTextHidden = scripture.IsCompletelyHidden(); //ends the while loop by updating value to true
 
             }
 
             //additional argument to handle last round if there is 1 word left
+            //last 4 words will disappear at the same time
             if ((pressedKey.Key == ConsoleKey.Enter) && (wordObjectCount - indexCount == 1)) 
             {
                 scripture.HideWords();
@@ -86,11 +92,12 @@ class Program
                 Console.WriteLine("Welcome to the Scripture Memoriser Program");
                 Console.WriteLine("--------------------------------------------\n");
 
-                Console.WriteLine(scripture.GetRenderedText()); //replace console text with the updated scripture with hidden words
+                //replace console text with the updated scripture with hidden words
+                Console.WriteLine(scripture.GetRenderedText()); 
 
                 Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
 
-                isTextHidden = scripture.IsCompletelyHidden();
+                isTextHidden = scripture.IsCompletelyHidden(); //ends the while loop by updating the value to true
 
             }
 
@@ -103,7 +110,6 @@ class Program
         }
 
         Console.WriteLine("\nGood Bye!\n");
-
 
 
     }
