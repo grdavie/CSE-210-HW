@@ -26,13 +26,11 @@ class Program
         
         while (isTextHidden == false) //while word._hidden for every object in the word list is not all true, loop
         {
-            ConsoleKeyInfo pressedKey = Console.ReadKey();
+            ConsoleKeyInfo pressedKey = Console.ReadKey(true);
     
             if (pressedKey.Key == ConsoleKey.Enter)
             {
                 
-                //if (indexCount % 3 == 0)
-                //{
                 scripture.HideWords();
                 scripture.HideWords();
                 scripture.HideWords();  //hide three unique words at a time
@@ -47,30 +45,11 @@ class Program
 
                 Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
 
-                    //indexCount = scripture.GetListCount();
-
-                //}
-
-                //else
-                //{
-                //    scripture.HideWords();
-
-                //    Console.Clear();
-//
-                //    Console.WriteLine("--------------------------------------------");
-                //    Console.WriteLine("Welcome to the Scripture Memoriser Program");
-                //    Console.WriteLine("--------------------------------------------\n");
-
-                //    Console.WriteLine(scripture.GetRenderedText()); 
-
-                //    Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
-
-                //}
-
             }
 
             else if (pressedKey.Key == ConsoleKey.Escape)
             {
+            
                 break;
             }
 

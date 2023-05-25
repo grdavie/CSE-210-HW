@@ -8,6 +8,7 @@ public class Scripture
     private List<Word> _listOfWords;
     private bool _completelyHidden;
     private List<int> _listOfIndex;
+    private Random randNum = new Random();
 
     public Scripture(Reference reference, string scriptureText)
     {
@@ -48,30 +49,35 @@ public class Scripture
         return renderedText;
     }
 
-    public void HideWords() //MODFIY!!
+    public void HideWords() 
     {
 
         int randomIndex = GetRandomIndex();
         
-        while (_listOfIndex.Contains(randomIndex))
+        while (_listOfIndex.Contains(randomIndex)) //get a unique index each time
         {
            randomIndex = GetRandomIndex();
         }
 
         _listOfIndex.Add(randomIndex);
 
-        _listOfWords[randomIndex].Hide();
+        _listOfWords[randomIndex].Hide(); //sets the _hidden attribute of the selected word object to true
+
+        //while (_listOfWords[randomIndex].IsHidden())
+        //{
+        //    randomIndex = GetRandomIndex();
+        //}
+
+        //_listOfWords[randomIndex].Hide();
+        //_listOfIndex.Add(randomIndex);
           
     }
-
+ 
     private int GetRandomIndex()
     {
-        Random randNum = new Random();
 
-        int randIndex =  randNum.Next(0, _listOfWords.Count);
-
-        return randIndex;
-
+        return randNum.Next(0, _listOfWords.Count);
+        
     }
 
     public bool IsCompletelyHidden()
@@ -93,11 +99,5 @@ public class Scripture
         return _completelyHidden;
     }
 
-    //public int GetListCount()
-    //{
-   //    int listOfIndexCount = _listOfIndex.Count;
-//
-    //    return listOfIndexCount;
-   // }
 
 }
