@@ -5,6 +5,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
+        
         Console.WriteLine("--------------------------------------------");
         Console.WriteLine("Welcome to the Scripture Memoriser Program");
         Console.WriteLine("--------------------------------------------\n");
@@ -27,7 +29,7 @@ class Program
         while (isTextHidden == false) //while word._hidden for every object in the word list is not all true, loop
         {
             ConsoleKeyInfo pressedKey = Console.ReadKey(true);
-            int indexCount = scripture.GetIndexCount();
+            int indexCount = scripture.GetIndexCount(); //initial indexCount will be 0
             int wordObjectCount = scripture.GetWordObjectCount();
     
             if (pressedKey.Key == ConsoleKey.Enter)
@@ -37,7 +39,7 @@ class Program
                 scripture.HideWords();
                 scripture.HideWords();  //hide three unique words at a time
 
-                indexCount = scripture.GetIndexCount();
+                indexCount = scripture.GetIndexCount(); //increase the indexCount value by 3 each loop
 
                 Console.Clear(); //clear the console to reprint everything
 
@@ -52,8 +54,29 @@ class Program
                 //isTextHidden = scripture.IsCompletelyHidden();
 
             }
+            
+            //additional argument to handle last round if there are 2 words left
+            if ((pressedKey.Key == ConsoleKey.Enter) && (wordObjectCount - indexCount == 2)) 
+            {
+                scripture.HideWords();
+                scripture.HideWords();
 
-            if ((pressedKey.Key == ConsoleKey.Enter) && (wordObjectCount - indexCount < 3))
+                Console.Clear(); //clear the console to reprint everything
+
+                Console.WriteLine("--------------------------------------------");
+                Console.WriteLine("Welcome to the Scripture Memoriser Program");
+                Console.WriteLine("--------------------------------------------\n");
+
+                Console.WriteLine(scripture.GetRenderedText()); //replace console text with the updated scripture with hidden words
+
+                Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
+
+                isTextHidden = scripture.IsCompletelyHidden();
+
+            }
+
+            //additional argument to handle last round if there is 1 word left
+            if ((pressedKey.Key == ConsoleKey.Enter) && (wordObjectCount - indexCount == 1)) 
             {
                 scripture.HideWords();
 
@@ -68,6 +91,7 @@ class Program
                 Console.WriteLine("\nPress ENTER to continue or press ESC to quit");
 
                 isTextHidden = scripture.IsCompletelyHidden();
+
             }
 
             else if (pressedKey.Key == ConsoleKey.Escape)
@@ -80,7 +104,6 @@ class Program
 
         Console.WriteLine("\nGood Bye!\n");
 
-        
 
 
     }

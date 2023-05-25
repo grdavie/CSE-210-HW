@@ -93,12 +93,12 @@ public class Scripture
         return _completelyHidden;
     }
 
-    public int GetIndexCount()
+    public int GetIndexCount() //return the object count for index list or the number of indexes inside the list
     {
         return _listOfIndex.Count;
     }
 
-    public int GetWordObjectCount()
+    public int GetWordObjectCount() //return the object count for the word list of number of word objects inside the list
     {
         return _listOfWords.Count;
     }
