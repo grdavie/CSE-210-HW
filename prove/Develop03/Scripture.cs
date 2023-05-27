@@ -103,5 +103,15 @@ public class Scripture
         return _listOfWords.Count;
     }
 
+    public void RestartProgram() //restarts the program and sets all words to visible again
+    {
+        _listOfIndex.Clear(); //empty the index list
+
+        foreach (Word word in _listOfWords)
+        {
+            word.Show();
+        }
+    }
+
 
 }
