@@ -89,9 +89,23 @@ public class Activity
 
         }
 
-        //Console.WriteLine("Done");
+    }
+
+    public static void PauseCountdownTimer(int timerDuration) //pausing while showing a countdown timer
+    {
+        int duration = timerDuration;
+
+        for (int i = timerDuration; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b\b \b");
+        }
+
+        Console.Write("Now!");
 
     }
+
 
 
 
