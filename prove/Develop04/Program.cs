@@ -18,6 +18,14 @@ class Program
 
         Console.WriteLine(userChoice);
 
+        BreathingActivity breathing = new BreathingActivity();
+        breathing.DisplayStartMessage();
+        breathing.DisplayEndMessage();
+
+
+
+
+        //Program Methods:
 
         static void DisplayMenu()
         {

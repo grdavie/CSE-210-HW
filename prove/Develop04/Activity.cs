@@ -8,8 +8,95 @@ public class Activity
 
     public Activity()
     {
+        //empty
+    }
+
+    public void DisplayStartMessage()
+    {
+        
+        Console.Clear();
+        Console.WriteLine($"Welcome to the {_activityName} Activity");
+        Console.WriteLine();
+        Console.WriteLine(_description);
+        Console.WriteLine();
+        Console.Write("How long, in seconds, would you like for your duration? ");
+        int duration = int.Parse(Console.ReadLine());
+
+        SetDuration(duration);
+      
+    }
+
+    public void SetDuration(int duration)
+    {   
+        _duration = duration;
+    }
+
+    public int GetDuration()
+    {
+        return _duration;
+    }
+
+
+    public void DisplayEndMessage()
+    {
+        Console.WriteLine("\nWell done!!");
+
+        PauseSpinner(5);
+
+        Console.WriteLine($"\nYou have completed {_duration} seconds of the {_activityName} Activity");
+
+        PauseSpinner(5);
 
     }
+
+    public static void PauseSpinner(int spinnerDuration) //pause while displaying a spinner for specified duration
+    {
+        int i = 0;
+
+        int duration = spinnerDuration;
+
+        List<string> animationStrings = new List<string>();
+        animationStrings.Add("|");
+        animationStrings.Add("/");
+        animationStrings.Add("-");
+        animationStrings.Add("\\");
+        animationStrings.Add("|");
+        animationStrings.Add("/");
+        animationStrings.Add("-");
+        animationStrings.Add("\\");
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(duration);
+
+        while (DateTime.Now < endTime)
+        {
+            string s = animationStrings[i];
+            Console.Write(s);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+
+            i++;
+
+            if (i == duration) //end the loop if index reaches the duration even if not completely done iterating through the objects
+            {
+                break;
+            }
+
+            else if (i >= animationStrings.Count) //end the loop at duration set even if duration is more than the object count (reset loop until duration ends)
+            {
+                i = 0;
+            }
+
+        }
+
+        //Console.WriteLine("Done");
+
+    }
+
+
+
+
+
 
 }
 
