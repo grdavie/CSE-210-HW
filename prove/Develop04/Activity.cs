@@ -163,8 +163,6 @@ public class Activity
 }
 
 
-//Listing Activity
-//This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area. 
 //List as many responses as you can to the following prompt:
 // --- Random Question Prompt ---
 //You may begin in: (countdown from 5)

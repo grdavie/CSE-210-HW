@@ -23,12 +23,18 @@ class Program
                 breathe.DisplayEndMessage();
             }
 
-            if (userChoice == 2)
+            else if (userChoice == 2)
             {
                 ReflectingActivity reflect = new ReflectingActivity();
                 reflect.DisplayStartMessage();
                 reflect.StartReflectingActivity();
                 reflect.DisplayEndMessage();
+            }
+
+            else if (userChoice == 3)
+            {
+                ListingActivity list = new ListingActivity();
+                list.DisplayStartMessage();
             }
         }
 
