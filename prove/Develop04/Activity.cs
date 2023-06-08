@@ -14,13 +14,48 @@ public class Activity
     public void DisplayStartMessage()
     {
         
+        int duration = -1;
+        
         Console.Clear();
         Console.WriteLine($"Welcome to the {_activityName} Activity");
         Console.WriteLine();
         Console.WriteLine(_description);
         Console.WriteLine();
-        Console.Write("How long, in seconds, would you like for your duration? ");
-        int duration = int.Parse(Console.ReadLine());
+
+        while (duration < 10 || duration % 10 != 0)
+        {
+      
+            try
+            {
+                Console.Write("How long, in seconds, would you like for your duration (minimum 10, in multiples of 10)? ");
+                duration = int.Parse(Console.ReadLine());
+
+                if (duration < 10)
+                {
+                    Console.WriteLine("Please set duration to no less than 10 seconds");
+                    Console.WriteLine();
+
+                }
+
+                else if (duration % 10 != 0)
+                {
+                    Console.WriteLine("Please select a duration in multiples of 10 (e.g. 10, 20, 30, etc)");
+                    Console.WriteLine();
+                }
+
+                else
+                {
+                  break;
+                }
+            
+            }
+
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.");
+            }
+
+        }
 
         SetDuration(duration);
       
@@ -45,6 +80,8 @@ public class Activity
         Console.WriteLine($"\nYou have completed {_duration} seconds of the {_activityName} Activity.");
 
         PauseSpinner(5);
+
+        Console.Clear();
 
     }
 
@@ -124,19 +161,6 @@ public class Activity
 
 
 }
-
-
-//Reflecting Activity
-//This activity will help you refelct on the times in your life when you have shown strength and resilience. This will help you recognise the power you have and how you can use it in other aspects of your life. 
-//Consider the following prompt:
-// --- Random Prompt ---
-//When you have something in mind, press enter to continue. (consolekey enter?)
-
-//Now ponder on each of the following questions as they relate to this experience.
-//You may begin in: (countdown from 5)
-// > Random Question #1? (5 second spinner etc)
-// > Random Questions #2? (5 second spinner etc)
-// stretch - ensure you get no duplicate questions before you can restart them
 
 
 //Listing Activity

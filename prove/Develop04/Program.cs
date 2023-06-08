@@ -22,13 +22,19 @@ class Program
                 breathe.StartBreathingActivity();
                 breathe.DisplayEndMessage();
             }
+
+            if (userChoice == 2)
+            {
+                ReflectingActivity reflect = new ReflectingActivity();
+                reflect.DisplayStartMessage();
+                reflect.StartReflectingActivity();
+                reflect.DisplayEndMessage();
+            }
         }
 
-      
+        Console.WriteLine("\nGood Bye!");
 
        
-
-
 
 
         //Program Methods:

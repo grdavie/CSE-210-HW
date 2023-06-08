@@ -22,10 +22,13 @@ public class BreathingActivity : Activity
 
         while (DateTime.Now < endTime)
         {
+            
             PauseCountdownTimer(4,"Breathe in...");
             Console.WriteLine();
             PauseCountdownTimer(6, "Breathe out...");
             Console.WriteLine();
+            Console.WriteLine();
+            
         }
     }
 }
