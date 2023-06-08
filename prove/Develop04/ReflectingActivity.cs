@@ -82,7 +82,7 @@ public class ReflectingActivity : Activity
 
     }
 
-    public void DisplayPrompt()
+    private void DisplayPrompt()
     {
         
         Console.WriteLine("Consider the following prompt:\n");
@@ -90,7 +90,7 @@ public class ReflectingActivity : Activity
 
     }
 
-    public void DisplayPromptQuestionAndReflect()
+    private void DisplayPromptQuestionAndReflect()
     {
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);

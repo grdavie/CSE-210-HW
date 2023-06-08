@@ -39,8 +39,15 @@ class Program
                 {
                     ListingActivity list = new ListingActivity();
                     list.DisplayStartMessage();
+                    list.StartListingActivity();
+                    list.DisplayEndMessage();
                 }
 
+                else if (userChoice == 4)
+                {
+                    break;
+                }
+                
                 else 
                 {
                     Console.WriteLine("Please choose between 1-4 only. Thank you!");
