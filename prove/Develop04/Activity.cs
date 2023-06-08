@@ -26,7 +26,7 @@ public class Activity
       
     }
 
-    public void SetDuration(int duration)
+    private void SetDuration(int duration)
     {   
         _duration = duration;
     }
@@ -36,14 +36,13 @@ public class Activity
         return _duration;
     }
 
-
     public void DisplayEndMessage()
     {
         Console.WriteLine("\nWell done!!");
 
         PauseSpinner(5);
 
-        Console.WriteLine($"\nYou have completed {_duration} seconds of the {_activityName} Activity");
+        Console.WriteLine($"\nYou have completed {_duration} seconds of the {_activityName} Activity.");
 
         PauseSpinner(5);
 
@@ -91,18 +90,30 @@ public class Activity
 
     }
 
-    public static void PauseCountdownTimer(int timerDuration) //pausing while showing a countdown timer
+    public static void PauseCountdownTimer(int timerDuration, string timerMessage) //pausing while showing a countdown timer
     {
         int duration = timerDuration;
+        string message = timerMessage;
 
         for (int i = timerDuration; i > 0; i--)
         {
-            Console.Write(i);
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write($"{message} {i}");
             Thread.Sleep(1000);
-            Console.Write("\b\b \b");
         }
 
-        Console.Write("Now!");
+        Console.SetCursorPosition(0, Console.CursorTop);
+        Console.Write($"{message}    ");
+    
+        
+        //for (int i = timerDuration; i > 0; i--)
+        //{
+        //    Console.Write(i);
+        //    Thread.Sleep(1000);
+        //    Console.Write("\b\b \b");
+        //}
+
+        //Console.Write("Now!");
 
     }
 
@@ -114,12 +125,6 @@ public class Activity
 
 }
 
-
-
-//Breathing Activity
-//This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing
-//Breathe in...(countdown from 4)
-//Now breathe out...(countdown from 6)
 
 //Reflecting Activity
 //This activity will help you refelct on the times in your life when you have shown strength and resilience. This will help you recognise the power you have and how you can use it in other aspects of your life. 

@@ -8,16 +8,25 @@ class Program
 
         int userChoice = -1; //set default userChoice value
         
-        DisplayMenu();
-        userChoice = GetUserChoice();
 
-        
-        PauseCountdownTimer(5);
+        while (userChoice != 4)
+        {
+
+            DisplayMenu();
+            userChoice = GetUserChoice();
+
+            if (userChoice == 1)
+            {
+                BreathingActivity breathe = new BreathingActivity();
+                breathe.DisplayStartMessage();
+                breathe.StartBreathingActivity();
+                breathe.DisplayEndMessage();
+            }
+        }
+
       
 
-        BreathingActivity breathing = new BreathingActivity();
-        breathing.DisplayStartMessage();
-        breathing.DisplayEndMessage();
+       
 
 
 
@@ -50,18 +59,5 @@ class Program
         }
     }
 
-    static void PauseCountdownTimer(int timerDuration)
-    {
-        int duration = timerDuration;
-
-        for (int i = timerDuration; i > 0; i--)
-        {
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write($"You may begin in: {i} ");
-            Thread.Sleep(1000);
-        }
-
-        Console.SetCursorPosition(0, Console.CursorTop);
-        Console.Write("You may begin now!");
-    }
+   
 }
