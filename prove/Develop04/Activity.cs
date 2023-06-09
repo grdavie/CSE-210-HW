@@ -11,6 +11,7 @@ public class Activity
         //empty
     }
 
+    //start message template
     public void DisplayStartMessage()
     {
         
@@ -22,14 +23,18 @@ public class Activity
         Console.WriteLine(_description);
         Console.WriteLine();
 
+        //limiting duration input to multiples of 10 starting with 10 seconds
         while (duration < 10 || duration % 10 != 0)
         {
       
             try
             {
+                
+                //Get user duration input within set limitations
                 Console.Write("How long, in seconds, would you like for your duration (minimum 10, in multiples of 10)? ");
                 duration = int.Parse(Console.ReadLine());
 
+                //restart loop if user inputs number less than 10
                 if (duration < 10)
                 {
                     Console.WriteLine("Please set duration to no less than 10 seconds");
@@ -37,12 +42,14 @@ public class Activity
 
                 }
 
+                //restart loop if user inputs a number that is not a multiple of 10
                 else if (duration % 10 != 0)
                 {
                     Console.WriteLine("Please select a duration in multiples of 10 (e.g. 10, 20, 30, etc)");
                     Console.WriteLine();
                 }
 
+                //break loop if input is a multiple of 10 and is equal or greater than 10
                 else
                 {
                   break;
@@ -50,6 +57,7 @@ public class Activity
             
             }
 
+            //exception handling if user inputs non-integer
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input. Please enter a valid integer.");
@@ -57,35 +65,33 @@ public class Activity
 
         }
 
+        //set the value for _duration attribute
         SetDuration(duration);
       
     }
 
+    //helper method to set duration 
     private void SetDuration(int duration)
     {   
         _duration = duration;
     }
 
-    public int GetDuration()
-    {
-        return _duration;
-    }
-
+    //end message template
     public void DisplayEndMessage()
     {
         Console.WriteLine("\nWell done!!");
 
-        PauseSpinner(5);
+        PauseSpinner(5); //5 second spinner
 
         Console.WriteLine($"\nYou have completed {_duration} seconds of the {_activityName} Activity.");
 
-        PauseSpinner(5);
+        PauseSpinner(5); //5 second spinner
 
         Console.Clear();
 
     }
 
-    public static void PauseSpinner(int spinnerDuration) //pause while displaying a spinner for specified duration
+    public static void PauseSpinner(int spinnerDuration) //pause while displaying a spinner for a specified duration
     {
         int i = 0;
 
@@ -127,20 +133,22 @@ public class Activity
 
     }
 
-    public static void PauseCountdownTimer(int timerDuration, string timerMessage) //pausing while showing a countdown timer
+    public static void PauseCountdownTimer(int timerDuration, string timerMessage) //pausing while showing a countdown timer, user can set timer duration and message before the countdown
     {
         int duration = timerDuration;
         string message = timerMessage;
 
         for (int i = timerDuration; i > 0; i--)
         {
+            //set cursor position so each loop overwrites on top of the previous loop
             Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write($"{message} {i}");
+            Console.Write($"{message} {i}"); //e.g. Timer starts in... 5
             Thread.Sleep(1000);
         }
 
+        //set cursor position so if duration is complete, console will still overwrite on the same line
         Console.SetCursorPosition(0, Console.CursorTop);
-        Console.Write($"{message}    ");
+        Console.Write($"{message}    "); //replace with the original message with no timer e.g. Timer starts in...   
     
         
         //for (int i = timerDuration; i > 0; i--)
@@ -161,13 +169,3 @@ public class Activity
 
 
 }
-
-
-//List as many responses as you can to the following prompt:
-// --- Random Question Prompt ---
-//You may begin in: (countdown from 5)
-// > {console readline} *add to a list of answers
-// > repeat until you run out of time
-// at the end of the timer display: You listed {#} items!
-
-//clear console to keep the screen clean each time an activity finishes or a new menu loads
