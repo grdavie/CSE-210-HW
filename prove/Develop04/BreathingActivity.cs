@@ -15,10 +15,7 @@ public class BreathingActivity : Activity
 
     public void StartBreathingActivity() //initiate the specific breathing activity behaviour
     {
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        PauseSpinner(5); //5 second spinner
-        Console.WriteLine();
+        DisplayGetReadySpinner();
 
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);

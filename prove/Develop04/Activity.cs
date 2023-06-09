@@ -18,7 +18,9 @@ public class Activity
         int duration = -1;
         
         Console.Clear();
+        Console.WriteLine("--------------------------------------------");
         Console.WriteLine($"Welcome to the {_activityName} Activity");
+        Console.WriteLine("--------------------------------------------");
         Console.WriteLine();
         Console.WriteLine(_description);
         Console.WriteLine();
@@ -160,6 +162,14 @@ public class Activity
 
         //Console.Write("Now!");
 
+    }
+
+    public void DisplayGetReadySpinner()
+    {
+        Console.Clear();
+        Console.WriteLine("Get ready...");
+        PauseSpinner(5); //5 second spinner
+        Console.WriteLine();
     }
 
 

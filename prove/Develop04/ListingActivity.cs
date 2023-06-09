@@ -35,10 +35,7 @@ public class ListingActivity : Activity
 
     public void StartListingActivity() //initiate the specific listing activity behaviour
     {
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        PauseSpinner(5); //5 second spinner
-        Console.WriteLine();
+        DisplayGetReadySpinner();
 
         DisplayPrompt();
 

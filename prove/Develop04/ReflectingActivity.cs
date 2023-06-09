@@ -44,10 +44,7 @@ public class ReflectingActivity : Activity
 
     public void StartReflectingActivity() //method to initiate the whole reflecting activity
     {
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        PauseSpinner(5); //5 second spinner
-        Console.WriteLine();
+        DisplayGetReadySpinner();
 
         DisplayPrompt();
 
