@@ -70,8 +70,6 @@ class Program
         Console.WriteLine("\nGood Bye!");
 
        
-
-
         //Program Methods:
 
         static void DisplayMenu()
