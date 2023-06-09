@@ -5,6 +5,12 @@ class Program
 {
     static void Main(string[] args)
     {
+        //Create empty lists to store all the prompts that show up during the session
+        List<string> listOfPreviousRandomPrompts = new List<string>();
+        List<string> listOfPreviousListPrompts = new List<string>();
+
+        int previousPromptsCount = 0;
+        int previousListPromptsCount = 0;
 
         int userChoice = -1; //set default userChoice value
         
@@ -29,18 +35,47 @@ class Program
 
                 else if (userChoice == 2)
                 {
-                    ReflectingActivity reflect = new ReflectingActivity();
+                    ReflectingActivity reflect = new ReflectingActivity(listOfPreviousRandomPrompts);
                     reflect.DisplayStartMessage();
                     reflect.StartReflectingActivity();
                     reflect.DisplayEndMessage();
+
+                    //update the previouspromptscount with the current list count
+                    previousPromptsCount = listOfPreviousRandomPrompts.Count;
+
+                    //get the actual count of prompts inside the list
+                    int listOfPromptsCount = reflect.GetListOfPromptsCount();
+
+
+                    //compare the values so that if all prompts have been used, reset the session by emptying
+                    //the previous prompts list. 
+                    if (previousPromptsCount == listOfPromptsCount)
+                    {
+                        listOfPreviousRandomPrompts.Clear();
+                    }
+
                 }
 
                 else if (userChoice == 3)
                 {
-                    ListingActivity list = new ListingActivity();
+                    ListingActivity list = new ListingActivity(listOfPreviousListPrompts);
                     list.DisplayStartMessage();
                     list.StartListingActivity();
                     list.DisplayEndMessage();
+
+                    //update the previoulistpromptscount with the current list count
+                    previousListPromptsCount = listOfPreviousListPrompts.Count;
+
+                    //get the actual count of list prompts inside the list
+                    int listOfListPromptsCount = list.GetListofListPromptsCount();
+
+                    //compare the values so that if all prompts have been used, reset the session by emptying
+                    //the previous list prompts list. 
+                    if (previousListPromptsCount == listOfListPromptsCount)
+                    {
+                        listOfPreviousListPrompts.Clear();
+                    }
+
                 }
 
                 else if (userChoice == 4)
@@ -48,6 +83,7 @@ class Program
                     break;
                 }
                 
+                //limit user input to numbers within the menu option
                 else 
                 {
                     Console.WriteLine("Please choose between 1-4 only. Thank you!");
@@ -57,6 +93,7 @@ class Program
 
             }
 
+            //exception handling if user inputs non-integer
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input. Please enter a valid integer.");
