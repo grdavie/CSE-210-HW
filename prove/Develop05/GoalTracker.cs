@@ -29,13 +29,22 @@ public class GoalTracker
 
     public void ListGoals() //displays all of the goals in the goal tracker
     {
-        foreach (Goal goals in _listOfGoals)
-        {
-            int index = _listOfGoals.IndexOf(goals);
-            int goalNumber = index + 1;
+        if (_listOfGoals.Count > 0)
+        { 
+            foreach (Goal goals in _listOfGoals)
+            {
+                int index = _listOfGoals.IndexOf(goals);
+                int goalNumber = index + 1;
 
-            Console.WriteLine($"{goalNumber}. {goals.DisplayGoal()}");
-           
+                Console.WriteLine($"{goalNumber}. {goals.DisplayGoal()}");
+            
+            }
+        }
+
+        else
+        {
+            Console.WriteLine("You currently do not have any goals to accomplish!");
+            Console.WriteLine("Please create new goals or load a file.");
         }
     }
 
@@ -72,6 +81,7 @@ public class GoalTracker
 
             Console.Write("Which goal did you accomplish? ");
             int userInput = int.Parse(Console.ReadLine());
+            bool completionStatus = _listOfGoals[userInput-1].IsComplete();
 
             if (userInput > 0 && userInput <= listCount) //if user choice is within the list
             {
@@ -82,13 +92,22 @@ public class GoalTracker
 
                 CalculateOverallPoints(); //get the sum of all points in the list, and update the value of _overallPoints
 
+                Console.WriteLine();
                 Console.WriteLine($"Congratulations! You have earned {pointsGained}");
                 Console.WriteLine($"You now have {_overallPoints}.");
 
             }
 
+            else if (userInput > 0 && userInput <= listCount && completionStatus == true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You have already completed this goal!");
+                Console.WriteLine("Please choose a different goal to accomplish.");
+            }
+
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("You have entered an invalid option.");
                 Console.WriteLine("Please choose a number within the list of options.");
             }
@@ -97,6 +116,7 @@ public class GoalTracker
 
         catch (FormatException)
         {
+            Console.WriteLine();
             Console.WriteLine("Invalid Input. Please enter a valid integer");
         }
 
@@ -107,6 +127,8 @@ public class GoalTracker
     {
         Console.Write("What is the fileanme? ");
         string filename = Console.ReadLine();
+
+        Console.WriteLine();
 
         if (File.Exists(filename))
 
@@ -226,8 +248,9 @@ public class GoalTracker
                         int bonusPoints = int.Parse(attribute[3]);
                         int targetAmount = int.Parse(attribute[4]);
                         int targetAccomplished = int.Parse(attribute[5]);
+                        bool isCompleted = bool.Parse(attribute[6]);
 
-                        ChecklistGoal newGoal = new ChecklistGoal(goalName, goalDescription, goalPoints, bonusPoints, targetAmount, targetAccomplished);
+                        ChecklistGoal newGoal = new ChecklistGoal(goalName, goalDescription, goalPoints, bonusPoints, targetAmount, targetAccomplished, isCompleted);
 
                         savedGoals.Add(newGoal);
                     }
