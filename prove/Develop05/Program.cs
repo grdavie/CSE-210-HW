@@ -17,14 +17,15 @@ class Program
         
         Console.Clear();
 
-        Console.WriteLine("--------------------------------------------");
-        Console.WriteLine("Welcome to the Goal Tracker Program");
-        Console.WriteLine("--------------------------------------------\n");
-
         while (userChoice != 6)
 
         {
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Welcome to the Goal Tracker Program");
+            Console.WriteLine("--------------------------------------------");
             
+            Console.WriteLine();
             goalTracker.DisplayOverallPoints();
             Console.WriteLine();
 
@@ -100,6 +101,8 @@ class Program
                     Console.WriteLine("Please choose a number within the list of options.");
                 }
 
+                Thread.Sleep(2000);
+                Console.Clear();
 
             }
 
@@ -112,6 +115,9 @@ class Program
             else if (userChoice == 3) //save as txt file
             {
                 goalTracker.SaveFile();
+
+                Thread.Sleep(2000);
+                Console.Clear();
             }
 
             else if (userChoice == 4) //load txt file
@@ -119,11 +125,17 @@ class Program
                 listOfPreviousGoals = goalTracker.LoadFile();
                 goalTracker.SetListOfGoals(listOfPreviousGoals);
 
+                Thread.Sleep(2000);
+                Console.Clear();
+
             }
 
             else if (userChoice == 5) //record event or mark complete
             {
                 goalTracker.MarkComplete();
+
+                Thread.Sleep(3000);
+                Console.Clear();
 
             }
 

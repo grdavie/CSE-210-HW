@@ -20,16 +20,17 @@ public abstract class Goal
 
     public abstract bool IsComplete();
 
-    public virtual void DisplayGoal()
+    public virtual string DisplayGoal()
     {
         if(_isCompleted == false)
         {
-            Console.Write($"[ ] {_goalName} ({_goalDescription})");
+            return $"[ ] {_goalName} ({_goalDescription})";
+            
         }
 
         else //if task is completed, mark it x when displaying
         {
-            Console.Write($"[x] {_goalName} ({_goalDescription})");
+            return $"[x] {_goalName} ({_goalDescription})";
         }
         
         

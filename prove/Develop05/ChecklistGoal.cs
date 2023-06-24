@@ -30,16 +30,16 @@ public class ChecklistGoal : Goal
     }
 
 
-    public override void DisplayGoal()
+    public override string DisplayGoal()
     {
         if(_isCompleted == false)
         {
-            Console.Write($"[ ] {_goalName} ({_goalDescription}) -- Currently completed: {_targetAccomplished}/{_targetAmount}");
+            return $"[ ] {_goalName} ({_goalDescription}) -- Currently completed: {_targetAccomplished}/{_targetAmount}";
         }
 
         else //if task is completed, mark it x when displaying
         {
-            Console.Write($"[x] {_goalName} ({_goalDescription}) -- Currently completed: {_targetAccomplished}/{_targetAmount}");
+            return $"[x] {_goalName} ({_goalDescription}) -- Currently completed: {_targetAccomplished}/{_targetAmount}";
         }
     }
 

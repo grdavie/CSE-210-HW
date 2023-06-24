@@ -34,8 +34,8 @@ public class GoalTracker
             int index = _listOfGoals.IndexOf(goals);
             int goalNumber = index + 1;
 
-            Console.WriteLine($"{goalNumber}. ");
-            goals.DisplayGoal();
+            Console.WriteLine($"{goalNumber}. {goals.DisplayGoal()}");
+           
         }
     }
 
@@ -64,7 +64,9 @@ public class GoalTracker
                 int index = _listOfGoals.IndexOf(goals);
                 int goalNumber = index + 1;
 
-                Console.WriteLine($"{goalNumber}. {goals.GetGoalName()}");
+                string goalName = goals.GetGoalName();
+
+                Console.WriteLine($"{goalNumber}. {goalName}");
 
             }
 
