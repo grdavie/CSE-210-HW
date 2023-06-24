@@ -6,7 +6,7 @@ using System.Linq;
 public class GoalTracker
 {
     private List<Goal> _listOfGoals;
-    private List<int> _listOfPoints;
+    private List<int> _listOfPoints; //list that stores the accumulated points throughout the session
 
     private int _overallPoints;
 
@@ -29,6 +29,7 @@ public class GoalTracker
 
     public void ListGoals() //displays all of the goals in the goal tracker
     {
+        //display goals only if list is not empty    
         if (_listOfGoals.Count > 0)
         { 
             foreach (Goal goals in _listOfGoals)
@@ -41,6 +42,7 @@ public class GoalTracker
             }
         }
 
+        //if empty, raise the error
         else
         {
             Console.WriteLine("You currently do not have any goals to accomplish!");
@@ -52,7 +54,7 @@ public class GoalTracker
     {
         int sum = _listOfPoints.Sum();
 
-        _overallPoints = sum;
+        _overallPoints = sum; //update the overallpoints to the calculated sum
     }
 
     public void DisplayOverallPoints()
@@ -65,7 +67,7 @@ public class GoalTracker
     {
         try 
         {
-            int listCount = _listOfGoals.Count;
+            int listCount = _listOfGoals.Count; //get object count to be used for conditional statements
             
             //diplay goal names as submenu
             foreach (Goal goals in _listOfGoals)
@@ -75,6 +77,7 @@ public class GoalTracker
 
                 string goalName = goals.GetGoalName();
 
+                //displays each goal as 1. Goal Name, 2. Goal name, etc.
                 Console.WriteLine($"{goalNumber}. {goalName}");
 
             }
@@ -89,14 +92,14 @@ public class GoalTracker
                 Goal selectedGoal = _listOfGoals[userInput-1];
                 bool completionStatus = selectedGoal.IsComplete();
 
-                if (completionStatus)
+                if (completionStatus) //if already completed or _isCompleted = True
                 {
                     Console.WriteLine();
                     Console.WriteLine("You have already completed this goal!");
                     Console.WriteLine("Please choose a different goal to accomplish.");
                 }
 
-                else
+                else //if _isCompleted = False, record event and update points
                 {
                     //returns points and will also update completion status for the selected goal where userInput-1 is the zero based index of the Goal object.
                     int pointsGained = selectedGoal.RecordEvent(); 
@@ -165,6 +168,7 @@ public class GoalTracker
 
     }
 
+    //actual save file method that can be reused
     private void ExecuteSaveFile(string filename)
     {
         Console.WriteLine($"Your file {filename} was saved successfully!");

@@ -28,7 +28,7 @@ class Program
                 Console.WriteLine("--------------------------------------------");
                 
                 Console.WriteLine();
-                goalTracker.DisplayOverallPoints();
+                goalTracker.DisplayOverallPoints(); //display user's current points
                 Console.WriteLine();
 
                 Console.WriteLine("Menu Options:\n");
@@ -55,12 +55,14 @@ class Program
                         Console.Write("Which type of goal would you like to create? ");
                         int goalSelected = int.Parse(Console.ReadLine());
                         
+                        //if user inputs an integer outside of the menu options, raise error
                         if (goalSelected > 3 || goalSelected < 1)
                         {
                             Console.WriteLine("You have entered an invalid option.");
                             Console.WriteLine("Please choose a number within the list of options.");
                         }
                         
+                        //if user selects an option within the menu continue asking the questions
                         else 
                         {
 
@@ -114,6 +116,7 @@ class Program
 
                     }
 
+                    //if user input is non-integer, raise error
                     catch (FormatException)
                     {
                         Console.WriteLine("Invalid input. Please enter a valid integer.");
@@ -129,6 +132,7 @@ class Program
                 {
                     goalTracker.ListGoals();
                     
+                    //display goals until user presses a key to restart while loop
                     Console.WriteLine("\nPress any key to return to menu: ");
                     Console.ReadKey();
 
@@ -147,7 +151,8 @@ class Program
 
                 else if (userChoice == 4) //load txt file
                 {
-                    
+                    //reset the overallPoints to 0 and clears _listOfPoints to load correct points
+                    //disregards the previously accumulated points when loading files without quitting program
                     goalTracker.ResetOverallPoints();
 
                     listOfPreviousGoals = goalTracker.LoadFile();
