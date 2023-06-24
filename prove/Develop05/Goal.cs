@@ -15,6 +15,7 @@ public abstract class Goal
         _isCompleted = false; //set status to not completed by default
     }
 
+
     public abstract int RecordEvent();
 
     public abstract bool IsComplete();
@@ -38,6 +39,10 @@ public abstract class Goal
     {
         return _goalName;
     }
+
+    //returns a string containing the pieces of data needed for creating a Goal object in a format that can be easily split into parts
+    //once loaded from a saved file. E.g. GoalType:{attribute a}~~{attribute b}~~etc;
+    public abstract string GetStringRepresentation(); 
 
 
     

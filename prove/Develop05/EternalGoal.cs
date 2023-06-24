@@ -24,4 +24,9 @@ public class EternalGoal : Goal
         return _isCompleted;
     }
 
+    public override string GetStringRepresentation()
+    {
+        return $"EternalGoal:{_goalName}~~{_goalDescription}~~{_goalPoints}";
+    }
+
 }

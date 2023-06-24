@@ -18,6 +18,18 @@ public class ChecklistGoal : Goal
 
     }
 
+    public ChecklistGoal(string goalName, string goalDescription, int goalPoints, int bonusPoints, int targetAmount, int targetAccomplished)
+        : base(goalName, goalDescription, goalPoints)
+    
+    {
+        _bonusPoints = bonusPoints;
+        _targetAmount = targetAmount;
+        _targetAccomplished = targetAccomplished;
+        _totalPoints = _goalPoints + _bonusPoints; //base + bonus points
+
+    }
+
+
     public override void DisplayGoal()
     {
         if(_isCompleted == false)
@@ -94,5 +106,11 @@ public class ChecklistGoal : Goal
         
         
     }
+
+    public override string GetStringRepresentation()
+    {
+        return $"ChecklistGoal:{_goalName}~~{_goalDescription}~~{_goalPoints}~~{_bonusPoints}~~{_targetAmount}~~{_targetAccomplished}";
+    }
+
 
 }   
