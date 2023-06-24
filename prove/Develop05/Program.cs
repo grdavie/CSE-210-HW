@@ -44,63 +44,80 @@ class Program
 
                 if (userChoice == 1) //Display submenu + add new goal
                 {
-                    Console.WriteLine("The types of Goals are:");
-                    Console.WriteLine("   1. Simple Goal");
-                    Console.WriteLine("   2. Eternal Goal");
-                    Console.WriteLine("   3. Checklist Goal\n");
-
-                    Console.Write("Which type of goal would you like to create? ");
-                    int goalSelected = int.Parse(Console.ReadLine());
-                    Console.Write("What is the name of your goal? ");
-                    string goalName = Console.ReadLine();
-                    Console.Write("What is a short description of it? ");
-                    string goalDescription = Console.ReadLine();
-                    Console.Write("What is the amount of points associated with this goal? ");
-                    int goalPoints = int.Parse(Console.ReadLine());
-
-                    if (goalSelected == 1)
+                    
+                    try
                     {
+                        Console.WriteLine("The types of Goals are:");
+                        Console.WriteLine("   1. Simple Goal");
+                        Console.WriteLine("   2. Eternal Goal");
+                        Console.WriteLine("   3. Checklist Goal\n");
+
+                        Console.Write("Which type of goal would you like to create? ");
+                        int goalSelected = int.Parse(Console.ReadLine());
                         
-                        Console.WriteLine("\nYour goal has been created!");
+                        if (goalSelected > 3 || goalSelected < 1)
+                        {
+                            Console.WriteLine("You have entered an invalid option.");
+                            Console.WriteLine("Please choose a number within the list of options.");
+                        }
+                        
+                        else 
+                        {
 
-                        SimpleGoal simpleGoal = new SimpleGoal(goalName, goalDescription, goalPoints);
+                            Console.Write("What is the name of your goal? ");
+                            string goalName = Console.ReadLine();
+                            Console.Write("What is a short description of it? ");
+                            string goalDescription = Console.ReadLine();
+                            Console.Write("What is the amount of points associated with this goal? ");
+                            int goalPoints = int.Parse(Console.ReadLine());
 
-                        //Add to the _listOfGoals inside the GoalTracker class
-                        goalTracker.AddGoal(simpleGoal);
+                            if (goalSelected == 1)
+                            {
+                                
+                                Console.WriteLine("\nYour goal has been created!");
 
+                                SimpleGoal simpleGoal = new SimpleGoal(goalName, goalDescription, goalPoints);
+
+                                //Add to the _listOfGoals inside the GoalTracker class
+                                goalTracker.AddGoal(simpleGoal);
+
+
+                            }
+
+                            else if (goalSelected == 2)
+                            {
+                                Console.WriteLine("\nYour goal has been created!");
+
+                                EternalGoal eternalGoal = new EternalGoal(goalName, goalDescription, goalPoints);
+
+                                //Add to the _listOfGoals inside the GoalTracker class
+                                goalTracker.AddGoal(eternalGoal);
+                            }
+
+                            else if (goalSelected == 3)
+                            {
+                                
+                                Console.Write("How many times does this goal need to be accomplished for a bonus? ");
+                                int targetAmount = int.Parse(Console.ReadLine());
+                                Console.Write("What is the bonus points for accomplishing this target? ");
+                                int bonusPoints = int.Parse(Console.ReadLine());
+                                
+                                Console.WriteLine("\nYour goal has been created!");
+
+                                ChecklistGoal checklistGoal = new ChecklistGoal(goalName, goalDescription, goalPoints, bonusPoints, targetAmount);
+
+                                //Add to the _listOfGoals inside the GoalTracker class
+                                goalTracker.AddGoal(checklistGoal);
+                            }
+
+                        }
 
                     }
 
-                    else if (goalSelected == 2)
+                    catch (FormatException)
                     {
-                        Console.WriteLine("\nYour goal has been created!");
-
-                        EternalGoal eternalGoal = new EternalGoal(goalName, goalDescription, goalPoints);
-
-                        //Add to the _listOfGoals inside the GoalTracker class
-                        goalTracker.AddGoal(eternalGoal);
-                    }
-
-                    else if (goalSelected == 3)
-                    {
-                        
-                        Console.Write("How many times does this goal need to be accomplished for a bonus? ");
-                        int targetAmount = int.Parse(Console.ReadLine());
-                        Console.Write("What is the bonus points for accomplishing this target? ");
-                        int bonusPoints = int.Parse(Console.ReadLine());
-                        
-                        Console.WriteLine("\nYour goal has been created!");
-
-                        ChecklistGoal checklistGoal = new ChecklistGoal(goalName, goalDescription, goalPoints, bonusPoints, targetAmount);
-
-                        //Add to the _listOfGoals inside the GoalTracker class
-                        goalTracker.AddGoal(checklistGoal);
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("You have entered an invalid option.");
-                        Console.WriteLine("Please choose a number within the list of options.");
+                        Console.WriteLine("Invalid input. Please enter a valid integer.");
+                    
                     }
 
                     Thread.Sleep(2000);
@@ -130,6 +147,9 @@ class Program
 
                 else if (userChoice == 4) //load txt file
                 {
+                    
+                    goalTracker.ResetOverallPoints();
+
                     listOfPreviousGoals = goalTracker.LoadFile();
                     goalTracker.SetListOfGoals(listOfPreviousGoals);
 

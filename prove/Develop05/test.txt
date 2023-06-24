@@ -1,4 +1,5 @@
-500
+700
 EternalGoal:Eternal Goal~~This is an eternal goal~~50
 SimpleGoal:Simple Goal~~This is a simple goal~~100~~True
 ChecklistGoal:Checklist Goal~~This is a checklist goal~~50~~200~~3~~3~~True
+SimpleGoal:Simple Goal 2~~This is another simple goal~~150~~True

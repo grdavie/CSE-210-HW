@@ -81,28 +81,36 @@ public class GoalTracker
 
             Console.Write("Which goal did you accomplish? ");
             int userInput = int.Parse(Console.ReadLine());
-            bool completionStatus = _listOfGoals[userInput-1].IsComplete();
+          
 
             if (userInput > 0 && userInput <= listCount) //if user choice is within the list
             {
-                //returns points and will also update completion status for the selected goal where userInput-1 is the zero based index of the Goal object.
-                int pointsGained = _listOfGoals[userInput-1].RecordEvent(); 
+                
+                Goal selectedGoal = _listOfGoals[userInput-1];
+                bool completionStatus = selectedGoal.IsComplete();
 
-                _listOfPoints.Add(pointsGained); //add points gained to the list of points
+                if (completionStatus)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("You have already completed this goal!");
+                    Console.WriteLine("Please choose a different goal to accomplish.");
+                }
 
-                CalculateOverallPoints(); //get the sum of all points in the list, and update the value of _overallPoints
+                else
+                {
+                    //returns points and will also update completion status for the selected goal where userInput-1 is the zero based index of the Goal object.
+                    int pointsGained = selectedGoal.RecordEvent(); 
 
-                Console.WriteLine();
-                Console.WriteLine($"Congratulations! You have earned {pointsGained}");
-                Console.WriteLine($"You now have {_overallPoints}.");
+                    _listOfPoints.Add(pointsGained); //add points gained to the list of points
 
-            }
+                    CalculateOverallPoints(); //get the sum of all points in the list, and update the value of _overallPoints
 
-            else if (userInput > 0 && userInput <= listCount && completionStatus == true)
-            {
-                Console.WriteLine();
-                Console.WriteLine("You have already completed this goal!");
-                Console.WriteLine("Please choose a different goal to accomplish.");
+                    Console.WriteLine();
+                    Console.WriteLine($"Congratulations! You have earned {pointsGained}");
+                    Console.WriteLine($"You now have {_overallPoints}.");
+                }
+                
+
             }
 
             else
@@ -196,6 +204,7 @@ public class GoalTracker
             {
                 string firstLine = lines[0]; //first line is the overallpoints saved
                 _overallPoints = int.Parse(firstLine); //update the value of _overallPoints to the saved points value
+                _listOfPoints.Add(_overallPoints);
             
 
                 for (int i = 1; i < lines.Length; i++) //iterate through all the lines starting from 2nd line
@@ -274,6 +283,12 @@ public class GoalTracker
             return savedGoals; //returns nothing
         }
 
+    }
+
+    public void ResetOverallPoints()
+    {
+        _overallPoints = 0;
+        _listOfPoints.Clear();
     }
 
 
