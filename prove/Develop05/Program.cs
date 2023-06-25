@@ -24,11 +24,12 @@ class Program
             {
                 Console.WriteLine();
                 Console.WriteLine("--------------------------------------------");
-                Console.WriteLine("Welcome to the Goal Tracker Program");
+                Console.WriteLine("    Welcome to the Goal Tracker Program");
                 Console.WriteLine("--------------------------------------------");
                 
                 Console.WriteLine();
                 goalTracker.DisplayOverallPoints(); //display user's current points
+                goalTracker.DisplayRank();
                 Console.WriteLine();
 
                 Console.WriteLine("Menu Options:\n");

@@ -59,7 +59,7 @@ public class GoalTracker
 
     public void DisplayOverallPoints()
     {
-        Console.WriteLine($"You have {_overallPoints} points.");
+        Console.WriteLine($"           You have {_overallPoints} points.");
 
     }
 
@@ -109,8 +109,8 @@ public class GoalTracker
                     CalculateOverallPoints(); //get the sum of all points in the list, and update the value of _overallPoints
 
                     Console.WriteLine();
-                    Console.WriteLine($"Congratulations! You have earned {pointsGained}");
-                    Console.WriteLine($"You now have {_overallPoints}.");
+                    Console.WriteLine($"Congratulations! You have earned {pointsGained} points.");
+                    Console.WriteLine($"You now have a total of {_overallPoints} points.");
                 }
                 
 
@@ -136,7 +136,7 @@ public class GoalTracker
 
     public void SaveFile()
     {
-        Console.Write("What is the fileanme? ");
+        Console.Write("What is the filename? ");
         string filename = Console.ReadLine();
 
         Console.WriteLine();
@@ -295,7 +295,100 @@ public class GoalTracker
         _listOfPoints.Clear();
     }
 
+    //stretch challenge
+    public void DisplayRank()
+    {
+        if (_overallPoints >= 0 && _overallPoints <= 150)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * * LVL 1 : NOVICE ACHIEVER * * +       ");
+            Console.WriteLine("\n        Embark on your goal journey");
 
+        }
+
+        else if (_overallPoints >= 151 && _overallPoints <= 600)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * *   LVL 2 : RISING STAR   * * +       ");
+            Console.WriteLine("\n   Making steady progress towards sucess");
+
+        }
+
+        else if (_overallPoints >= 601 && _overallPoints <= 1300)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * *   LVL 3 : TRAILBLAZER    * * +       ");
+            Console.WriteLine("\n    Push boundaries, reach new heights");
+
+        }
+
+        else if (_overallPoints >= 1301 && _overallPoints <= 2000)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * *   LVL 4 : GOAL MASTER   * * +       ");
+            Console.WriteLine("\n    Achieveing remarkable milestones");
+
+        }
+
+        else if (_overallPoints >= 2001 && _overallPoints <= 3000)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * * LVL 5 : ELITE PERFORMER * * +       ");
+            Console.WriteLine("\n     Reaching goals with confidence");
+
+        }
+
+        else if (_overallPoints >= 3001 && _overallPoints <= 4500)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * * LVL 6 : PRODIGY PURSUER * * +       ");
+            Console.WriteLine("\n     Unleashing your full potential");
+
+        }
+
+        else if (_overallPoints >= 4501 && _overallPoints <= 6500)
+        {
+            RankLoadingMessage();
+            Console.Write("     + * * LVL 7 : VICTORY VOYAGER * * +       ");
+            Console.WriteLine("\nConquering challenges, surpassing expectations");
+
+        }
+
+        else if (_overallPoints >= 6501 && _overallPoints <= 9500)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * * LVL 8 : SUPREME STRIVER * * +       ");
+            Console.WriteLine("\n   Pursuing the heights of goal mastery");
+
+        }
+
+        else if (_overallPoints >= 9501 && _overallPoints <= 15000)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * * LVL 9 : LEGENDARY ACHIEVER * * +       ");
+            Console.WriteLine("\n    Attaining the pinnacle of achievement");
+
+        }
+
+        else if (_overallPoints >= 15001)
+        {
+            RankLoadingMessage();
+            Console.Write("   + * * LVL 10 : ULTIMATE GOAL CONQUEROR * * +       ");
+            Console.WriteLine("\n        Defying limits, setting records!");
+
+        }
+    }
+
+    private void RankLoadingMessage()
+    {
+        Console.WriteLine();
+        Console.Write("   + * * loading Goal Tracker rank * * +");
+        Console.SetCursorPosition(0, Console.CursorTop);
+        Thread.Sleep(1000);
+        Console.Write("   + + + - - - - - - - - - - -  + + +   ");
+        Console.SetCursorPosition(0, Console.CursorTop);
+        Thread.Sleep(1000);
+    }
 
 
 }

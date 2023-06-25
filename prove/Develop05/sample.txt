@@ -1,0 +1,4 @@
+890
+SimpleGoal:Exercise~~Do a simple 30 minute yoga workout tonight~~50~~True
+EternalGoal:Brush teeth~~Brush teeth for 3 minutes~~20
+ChecklistGoal:Run ~~Run 10KM around the block~~100~~500~~3~~3~~True
