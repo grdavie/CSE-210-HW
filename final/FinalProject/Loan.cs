@@ -7,7 +7,7 @@ public abstract class Loan
     protected int _depositAmount;
     protected int _loanTerm; //in months
     protected double _interestRate; //expressed as a decimal
-    protected double _assessmentRate; //7.30% default or if interest is higher than 7.30%, add 2% e.g. 9% IR will have 11% assessment rate
+    protected double _assessmentRate; //7.30% default or if interest is higher than 6%, add 2.5% e.g. 6.5% IR will have 9% assessment rate
     protected double _lvr; //loan to value ratio expressed as a decimal e.g 80% = 0.80
     
 
@@ -18,14 +18,45 @@ public abstract class Loan
         _loanAmount = _securityValue - _depositAmount;
         _loanTerm = loanTerm * 12;
 
-        _lvr = _loanAmount / _securityValue;
+        _lvr = _loanAmount / _securityValue; //must be a minimum of 80 or requires a 20% of security value deposit
 
     }
 
-    public abstract void SetAssessmentRate();
-
+    //rates are different between O/O and INV based on their LVR tiers
     public abstract void SetInterestRate();
-    public abstract float CalculateMonthlyRepayments();
+
+    //7.30% default or if interest is higher than 6%, add 2.5% e.g. 6.5% IR will have 9% assessment rate
+    public void SetAssessmentRate()
+    {
+        if(_interestRate <= 0.060)
+        {
+            _assessmentRate = 0.073; //7.30%
+        }
+
+        else //if greater than 0.060
+        {
+            _assessmentRate = _interestRate + 0.025;
+        }
+    }
+
+    public double CalculateMonthlyRepayments()
+    {
+        // A = P * ( (r(1+r)**n) / ((1+r)**n) -1 )
+        //A: Periodic payment amount
+        //P: Principal loan amount
+        //r: Periodic interest rate (expressed as a decimal)
+        //n: Number of periods
+
+        double P = _loanAmount;
+        double r = _interestRate / 12;
+        int n = _loanTerm;
+
+        double A = P * ( (r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+
+        return A;
+        
+    }
+
 
     public double GetAssessmentRate()
     {
@@ -50,14 +81,15 @@ public abstract class Loan
     public void DisplayLoanDetails()
     {
         int LVR = Convert.ToInt32(_lvr * 100);
-        float repayment = CalculateMonthlyRepayments();
+        int repayment = (int)Math.Round(CalculateMonthlyRepayments()); //round to the nearest whole number
+        int interest = Convert.ToInt32(_interestRate * 100);
         
         
         Console.WriteLine($"> Property Value: ${_securityValue}");
         Console.WriteLine($"> Loan Amount Required: ${_loanAmount}");
         Console.WriteLine($"> LVR: {LVR}%");
         Console.WriteLine($"> Loan Term: {_loanTerm} months ({_loanTerm/12} yrs)");
-        Console.WriteLine($"> Applicable Interest Rate: {_interestRate}");
+        Console.WriteLine($"> Applicable Interest Rate: {interest}%");
         Console.WriteLine($"> Indicative Monthly Repayment: ${repayment}");
       
         //assessment rate does not need to be disclosed
