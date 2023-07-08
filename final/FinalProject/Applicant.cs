@@ -7,19 +7,35 @@ public class Applicant : Person
     private double _netIncome;
     private int _annualLivingCosts;
     private int _creditLimit;
+    private int _otherLoans;
 
-    public Applicant(string name, string phoneNumber, string emailAddress, bool isSingle, int dependants, int baseIncome, int livingCosts, int creditLimit) 
+    //constructor for single, no other loans
+    public Applicant(string name, string phoneNumber, string emailAddress, bool isSingle, int dependants, int netIncome, int livingCosts, int creditLimit) 
     : base(name, phoneNumber, emailAddress)
     {
         _isSingle = isSingle;
         _dependants = dependants;
-        _netIncome = CalcuateNetIncome(baseIncome);
+        _netIncome = netIncome;
         _annualLivingCosts = livingCosts * 12; //estimated monthly living cost * 12
         _creditLimit = creditLimit;
+        _otherLoans = 0; //no other loan repayments
 
     }
 
-    private double CalcuateNetIncome(int baseIncome)
+    //constructor for single, with other loans
+    public Applicant(string name, string phoneNumber, string emailAddress, bool isSingle, int dependants, int netIncome, int livingCosts, int creditLimit, int otherLoans) 
+    : base(name, phoneNumber, emailAddress)
+    {
+        _isSingle = isSingle;
+        _dependants = dependants;
+        _netIncome = netIncome;
+        _annualLivingCosts = livingCosts * 12; //estimated monthly living cost * 12
+        _creditLimit = creditLimit;
+        _otherLoans = otherLoans * 12; //estimated annual other loan repayments
+
+    }
+
+    public double CalcuateNetIncome(int baseIncome)
     {
         //calculate the net income by using the base annual income (base - income tax payable)
         //create simple calculator based on below AU tax brackets:
@@ -58,9 +74,14 @@ public class Applicant : Person
 
     public double GetCreditRepayment() //3% of credit limit is the estimated monthly credit card repayment amount
     {
-        double creditRepayment = _creditLimit * 0.03;
+        double creditRepayment = (_creditLimit * 0.03) * 12; //get annual repayment
 
         return creditRepayment; 
+    }
+
+    public int GetOtherLoans()
+    {
+        return _otherLoans;
     }
 
     public void DisplayApplicationDetails()
@@ -79,7 +100,12 @@ public class Applicant : Person
         Console.WriteLine($"> Annual Net Income: ${_netIncome}");
         Console.WriteLine($"> Estimated Annual Living Costs: ${_annualLivingCosts}");
         Console.WriteLine($"> Total Credit Limit: ${_creditLimit}");
+       
+       if(_otherLoans > 0)
+       {
+            Console.WriteLine($"> Current Loan Repayments: ${_otherLoans}");
 
+       }
         
     }
 
