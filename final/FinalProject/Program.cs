@@ -326,9 +326,9 @@ class Program
     {
         Console.Clear();
         Console.WriteLine();
-        Console.WriteLine("-------------------------------------------------------------");
-        Console.WriteLine("LoanCheck: Simple Loan Eligibility Assessment Tool");
-        Console.WriteLine("-------------------------------------------------------------");
+        Console.WriteLine("-----------------------------------------------------------------------");
+        Console.WriteLine("         LoanCheck: Simple Loan Eligibility Assessment Tool");
+        Console.WriteLine("-----------------------------------------------------------------------");
         Console.WriteLine();
         
     }
