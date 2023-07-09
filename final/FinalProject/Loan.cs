@@ -18,7 +18,7 @@ public abstract class Loan
         _loanAmount = _securityValue - _depositAmount;
         _loanTerm = loanTerm * 12;
 
-        _lvr = _loanAmount / _securityValue; //must be a minimum of 80 or requires a 20% of security value deposit
+        _lvr = (double)_loanAmount / securityValue; //must be a minimum of 80 or requires a 20% of security value deposit
 
     }
 
@@ -48,7 +48,7 @@ public abstract class Loan
         //n: Number of periods
 
         double P = _loanAmount;
-        double r = _interestRate / 12;
+        double r = _assessmentRate / 12; //the higher assessment rate will be used instead of interest rate to provide a buffer
         int n = _loanTerm;
 
         double A = P * ( (r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
@@ -78,19 +78,24 @@ public abstract class Loan
         return _loanAmount;
     }
 
+
     public void DisplayLoanDetails()
     {
-        int LVR = Convert.ToInt32(_lvr * 100);
+        
+        double LVR = _lvr * 100;
+        double interest = _interestRate * 100;
+        
+        //string formattedLVR = LVR.ToString("F2");
         int repayment = (int)Math.Round(CalculateMonthlyRepayments()); //round to the nearest whole number
-        int interest = Convert.ToInt32(_interestRate * 100);
+        string formattedInterest = interest.ToString("F2");
         
         
-        Console.WriteLine($"> Property Value: ${_securityValue}");
-        Console.WriteLine($"> Loan Amount Required: ${_loanAmount}");
-        Console.WriteLine($"> LVR: {LVR}%");
-        Console.WriteLine($"> Loan Term: {_loanTerm} months ({_loanTerm/12} yrs)");
-        Console.WriteLine($"> Applicable Interest Rate: {interest}%");
-        Console.WriteLine($"> Indicative Monthly Repayment: ${repayment}");
+        Console.WriteLine($"     > Property Value: ${_securityValue}");
+        Console.WriteLine($"     > Loan Amount Required: ${_loanAmount}");
+        Console.WriteLine($"     > LVR: {LVR}%");
+        Console.WriteLine($"     > Loan Term: {_loanTerm} months ({_loanTerm/12} yrs)");
+        Console.WriteLine($"     > Applicable Interest Rate: {formattedInterest}%");
+        Console.WriteLine($"     > Indicative Monthly Repayment: ${repayment}");
       
         //assessment rate does not need to be disclosed
     }

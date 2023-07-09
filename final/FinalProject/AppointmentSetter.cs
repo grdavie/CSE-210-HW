@@ -9,12 +9,11 @@ public class AppointmentSetter
     private string _appointmentDay;
     private string _appointmentTime;
 
-    private LendingSpecialist _lendingSpecialist;
 
     public AppointmentSetter(Applicant applicant, string appointmentDay, string appointmentTime)
     {
        
-        string filename = "specialists.txt";
+        string filename = "specialists.txt"; //reads from file to create lending specialist objects
 
        _listOfSpecialists = LoadFile(filename);
        _applicant = applicant;
@@ -27,6 +26,9 @@ public class AppointmentSetter
     public void AssignLendingSpecialist()
     {
         //method to randomly match applicant's appointment to a specialist that fits the schedule
+
+
+
     }
 
     public void DisplayAppointmentConfirmation()

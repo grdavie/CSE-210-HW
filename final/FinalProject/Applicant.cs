@@ -9,29 +9,14 @@ public class Applicant : Person
     private int _creditLimit;
     private int _otherLoans;
 
-    //constructor for single, no other loans
-    public Applicant(string name, string phoneNumber, string emailAddress, bool isSingle, int dependants, int netIncome, int livingCosts, int creditLimit) 
+    public Applicant(string name, string phoneNumber, string emailAddress, bool isSingle, int dependants, int livingCosts, int creditLimit, int otherLoans) 
     : base(name, phoneNumber, emailAddress)
     {
         _isSingle = isSingle;
         _dependants = dependants;
-        _netIncome = netIncome;
         _annualLivingCosts = livingCosts * 12; //estimated monthly living cost * 12
         _creditLimit = creditLimit;
-        _otherLoans = 0; //no other loan repayments
-
-    }
-
-    //constructor for single, with other loans
-    public Applicant(string name, string phoneNumber, string emailAddress, bool isSingle, int dependants, int netIncome, int livingCosts, int creditLimit, int otherLoans) 
-    : base(name, phoneNumber, emailAddress)
-    {
-        _isSingle = isSingle;
-        _dependants = dependants;
-        _netIncome = netIncome;
-        _annualLivingCosts = livingCosts * 12; //estimated monthly living cost * 12
-        _creditLimit = creditLimit;
-        _otherLoans = otherLoans * 12; //estimated annual other loan repayments
+         _otherLoans = otherLoans * 12; //estimated annual other loan repayments
 
     }
 
@@ -46,9 +31,14 @@ public class Applicant : Person
             //$120,001-$180,000 = 37c for every dollar or 37%; $22,000 additional if income is 180K
             //$180,001+ = 45c for every dollar or 45%
 
-        double netIncome = 10000; //placeholder
+        double netIncome = baseIncome; //placeholder
         
         return netIncome; 
+    }
+
+    public void SetNetIncome(double netIncome)
+    {
+        _netIncome = netIncome;
     }
 
     public double GetNetIncome()
@@ -88,22 +78,22 @@ public class Applicant : Person
     {
         if(_isSingle == true)
         {
-            Console.WriteLine("> Status: Single");
+            Console.WriteLine("     > Status: Single");
         }
 
         else
         {
-            Console.WriteLine("> Status: Partnered");
+            Console.WriteLine("     > Status: Partnered");
         }
 
-        Console.WriteLine($"> Dependants: {_dependants}");
-        Console.WriteLine($"> Annual Net Income: ${_netIncome}");
-        Console.WriteLine($"> Estimated Annual Living Costs: ${_annualLivingCosts}");
-        Console.WriteLine($"> Total Credit Limit: ${_creditLimit}");
+        Console.WriteLine($"     > Dependants: {_dependants}");
+        Console.WriteLine($"     > Annual Net Income: ${_netIncome}");
+        Console.WriteLine($"     > Estimated Annual Living Costs: ${_annualLivingCosts}");
+        Console.WriteLine($"     > Total Credit Limit: ${_creditLimit}");
        
        if(_otherLoans > 0)
        {
-            Console.WriteLine($"> Current Loan Repayments: ${_otherLoans}");
+            Console.WriteLine($"     > Current Loan Repayments: ${_otherLoans}");
 
        }
         
