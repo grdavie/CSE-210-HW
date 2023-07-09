@@ -174,7 +174,7 @@ class Program
 
        int type = 0;
 
-       //ADD ERROR HANDLING
+       //ADD ERROR HANDLING - ENSURE THAT DEPOSIT IS NO LESS THAN 20% OF PROPERTY VALUE
        Console.Write("     What is the value of the property you want to purchase? : ");
        int securityValue = int.Parse(Console.ReadLine());
        Console.Write("     What is your deposit amount? : ");
