@@ -2,16 +2,16 @@ using System;
 
 public abstract class Loan
 {
-    protected int _loanAmount;
-    protected int _securityValue;
-    protected int _depositAmount;
+    protected double _loanAmount;
+    protected double _securityValue;
+    protected double _depositAmount;
     protected int _loanTerm; //in months
     protected double _interestRate; //expressed as a decimal
     protected double _assessmentRate; //7.30% default or if interest is higher than 6%, add 2.5% e.g. 6.5% IR will have 9% assessment rate
     protected double _lvr; //loan to value ratio expressed as a decimal e.g 80% = 0.80
     
 
-    public Loan(int securityValue, int depositAmount, int loanTerm) //loanTerm in years
+    public Loan(double securityValue, double depositAmount, int loanTerm) //loanTerm in years
     {
         _securityValue = securityValue;
         _depositAmount = depositAmount;
@@ -51,7 +51,7 @@ public abstract class Loan
         double r = _assessmentRate / 12; //the higher assessment rate will be used instead of interest rate to provide a buffer
         int n = _loanTerm;
 
-        double A = P * ( (r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1));
+        double A = P * ( (r * Math.Pow(1 + r, n)) / (Math.Pow(1 + r, n) - 1)); 
 
         return A;
         
@@ -73,7 +73,7 @@ public abstract class Loan
         return _loanTerm;
     }
 
-    public int GetPrincipal()
+    public double GetPrincipal()
     {
         return _loanAmount;
     }

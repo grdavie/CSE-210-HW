@@ -9,6 +9,7 @@ class Program
        Console.WriteLine("Welcome! To get started, kindly provide the requested information:\n");
        
        Console.WriteLine("+ STEP 1: ABOUT YOU +\n");
+       
        //Contact details
        Console.Write("     Name: ");
        string name = Console.ReadLine();
@@ -19,6 +20,7 @@ class Program
        int status = 0;
        bool isSingle = true;
 
+       //check relationship status
        while(status != 1 || status !=2)
        {
             try
@@ -54,7 +56,7 @@ class Program
                 }
         }
  
-       
+       //check number of dependants
        int dependant = -999999999;
        Console.Write("     Dependants - enter 0 if none: ");
        
@@ -90,7 +92,8 @@ class Program
 
             }
         }
-
+       
+       //TRANSITION TO STEP 2
        DisplaySaveMessage();
        DisplayHeader();
        Console.WriteLine("Welcome! To get started, kindly provide the requested information:\n");
@@ -98,36 +101,65 @@ class Program
        //Applicant information
        Console.WriteLine("+ STEP 2: YOUR INCOME & EXPENSES +\n");
 
-       int creditLimit = 0;
-       int otherLoans =  0;
-       int baseIncome = 0;
-       int partnerIncome = 0;
+       int creditLimit = -1;
+       int otherLoans =  -1;
+       int baseIncome = -1;
+       int partnerIncome = -1;
 
        //ask base income if single
        if(status==1)
        {
-            Console.Write("     What is your base annual income? : ");
-            baseIncome = int.Parse(Console.ReadLine());
-            Console.Write("     What is your total credit card limit? - enter 0 if none : ");
-            creditLimit = int.Parse(Console.ReadLine());
-
+            
+            baseIncome = DisplayBaseIncomeQuestion(baseIncome, "base");
+            creditLimit = DisplayCreditLimitQuestion(creditLimit, "total");
+            partnerIncome = 0;
+        
        }
     
         //if partnerned, ask partner income
        else if(status==2)
        {
-            Console.Write("     What is your base annual income? : ");
-            baseIncome = int.Parse(Console.ReadLine());
-            Console.Write("     What is your partner's base annual income? : ");
-            partnerIncome = int.Parse(Console.ReadLine());
-            Console.Write("     What is your total combined credit card limit? - enter 0 if none: ");
-            creditLimit = int.Parse(Console.ReadLine());
+            
+            baseIncome = DisplayBaseIncomeQuestion(baseIncome, "base");
+            partnerIncome = DisplayBaseIncomeQuestion(partnerIncome, "partner's base");
+            creditLimit = DisplayCreditLimitQuestion(creditLimit, "total combined");
 
        }
 
+       //ask living costs     
+       int livingCosts = -1;
        Console.Write("     What is your estimated monthly bills and living expenses? : ");
-       int livingCosts = int.Parse(Console.ReadLine());
-       
+
+       while(livingCosts < 0)
+       {
+            try
+            {
+                livingCosts = int.Parse(Console.ReadLine());
+
+                if(livingCosts >=0)
+                {
+                    break;
+                }
+
+                else
+                {
+                    Console.WriteLine("         You cannot have a negative bill or expenses!");
+                    Console.WriteLine("         Please input an amount equal or higher than 0");
+                    Console.Write("     What is your estimated monthly bills and living expenses? : ");
+
+                }
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                Console.Write("     What is your estimated monthly bills and living expenses? : ");
+            
+            }
+        
+            
+       }
+            
        string choice = "";
        Console.WriteLine("     Do you have a current mortgage or other loan repayments (personal, car, student, etc)?  - y or n");
 
@@ -140,9 +172,41 @@ class Program
 
             if(choice=="y")
             {
+                    
                     Console.Write("     What is your total monthly repayments for all existing loans (rounded to the nearest dollar)? : ");
-                    otherLoans = int.Parse(Console.ReadLine());
+                    
+                    while(otherLoans < 0)
+                    {
+                        try
+                        {
+                            otherLoans = int.Parse(Console.ReadLine());
+
+                            if(otherLoans >= 0)
+                            {
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("         You cannot have a negative monthly repayment!");
+                                Console.WriteLine("         Please input an amount equal or higher than 0");
+                                Console.Write("     What is your total monthly repayments for all existing loans (rounded to the nearest dollar)? : ");
+                            }
+
+                        }
+
+                        catch(FormatException)
+                        {
+                            Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                            Console.Write("     What is your total monthly repayments for all existing loans (rounded to the nearest dollar)? : ");
+                            
+                        
+                        }
+
+                    }
+                    
                     break;
+
             }
 
             else if(choice=="n")
@@ -166,52 +230,191 @@ class Program
        double netIncome = applicant.CalcuateNetIncome(baseIncome) + applicant.CalcuateNetIncome(partnerIncome);
        applicant.SetNetIncome(netIncome);
 
+
+       //TRANSITION TO STEP 3 
        DisplaySaveMessage();
        DisplayHeader();
 
         //Loan information
        Console.WriteLine("+ STEP 3: YOUR LOAN DETAILS +\n");
 
-       int type = 0;
+       int type = -1;
+       double securityValue = -1;
+       double depositAmount = -1;
+       int loanTerm = -1;
 
-       //ADD ERROR HANDLING - ENSURE THAT DEPOSIT IS NO LESS THAN 20% OF PROPERTY VALUE
-       Console.Write("     What is the value of the property you want to purchase? : ");
-       int securityValue = int.Parse(Console.ReadLine());
-       Console.Write("     What is your deposit amount? : ");
-       int depositAmount = int.Parse(Console.ReadLine());
-       Console.Write("     How many years would you like to pay off the loan? - maximum 30 years : ");
-       int loanTerm = int.Parse(Console.ReadLine());
-       Console.Write("     Is this a (1) house to live-in or an (2) investment property? : ");
-       type = int.Parse(Console.ReadLine());
-
-       if(type==1) //owner-occupied home
-       {
-            OwnerOccupied loan = new OwnerOccupied(securityValue, depositAmount, loanTerm);
-            loan.SetInterestRate();
-            loan.SetAssessmentRate();
-
-            Step4(applicant, loan);
-            Step5(applicant);
-
-       }
        
-       else if(type==2) //investment property
+       //ask Security Value
+       Console.Write("     What is the value of the property you want to purchase? : ");
+
+       while(securityValue < 0)
+            
+        {
+            try 
+            {
+               
+                securityValue = int.Parse(Console.ReadLine());
+                
+                if(securityValue >= 0)
+                {
+                    break;
+                }
+
+                else
+                {
+                    Console.WriteLine("         You cannot have a negative security value!");
+                    Console.WriteLine("         Please input a value equal or higher than 0");
+                    Console.Write("     What is the value of the property you want to purchase? : ");
+                
+                }
+
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                Console.Write("     What is the value of the property you want to purchase? : ");
+            
+            }
+
+        }
+
+       //ask deposit amount - must not be lower than 20% of the property value (LVR 80 or lower)
+       
+       Console.Write("     What is your deposit amount? : ");
+       double percentage = -1;
+
+       while(depositAmount <= 0 || percentage < 20)
+            
+        {
+            try 
+            {
+            
+                depositAmount = int.Parse(Console.ReadLine());
+                percentage = (double)(depositAmount / securityValue) * 100;
+                
+                if(depositAmount > 0 && percentage >= 20)
+                {
+                
+                    break;
+
+                }
+
+                else
+                {
+              
+                    Console.WriteLine("         You cannot have a deposit amount lower than 20% of your security value!");
+                    Console.Write("     What is your deposit amount? : ");
+                
+                }
+
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                Console.Write("     What is your deposit amount? : ");
+            
+            }
+
+        }
+
+        Console.WriteLine(depositAmount);
+        Console.WriteLine(percentage);
+       //ask loan term
+       Console.Write("     How many years would you like to pay off the loan? - maximum 30 years : ");
+
+       while(loanTerm <= 0 || loanTerm > 30)
+            
+        {
+            try 
+            {
+               
+                loanTerm = int.Parse(Console.ReadLine());
+                
+                if(loanTerm > 0 && loanTerm <= 30) //term at least 1 year and no greater than 30 yrs
+                {
+                    break;
+                }
+
+                else if(loanTerm <= 0)
+                {
+                    Console.WriteLine("         You cannot have a negative or 0 loan term");
+                    Console.Write("     How many years would you like to pay off the loan? - maximum 30 years : ");
+                
+                }
+
+                else 
+                {
+                    Console.WriteLine("         You cannot have a loan term greater than 30 years");
+                    Console.Write("     How many years would you like to pay off the loan? - maximum 30 years : ");
+                }
+
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                Console.Write("     How many years would you like to pay off the loan? - maximum 30 years : ");
+            
+            }
+
+        }
+
+
+       //ask loan type
+       Console.Write("     Is this a (1) house to live-in or an (2) investment property? : ");
+       
+       while(type < 1)
        {
-            Investment loan = new Investment(securityValue, depositAmount, loanTerm);
-            loan.SetInterestRate();
-            loan.SetAssessmentRate();
+            try
+            {
+                type = int.Parse(Console.ReadLine());
+            
+                if(type==1) //owner-occupied home
+                {
+                    OwnerOccupied loan = new OwnerOccupied(securityValue, depositAmount, loanTerm);
+                    loan.SetInterestRate();
+                    loan.SetAssessmentRate();
 
-            Step4(applicant, loan);
-            Step5(applicant);
+                    Step4(applicant, loan);
+                    Step5(applicant);
 
-       }
+                    break;
 
-       else
-       {
+                }
+                
+                else if(type==2) //investment property
+                {
+                    Investment loan = new Investment(securityValue, depositAmount, loanTerm);
+                    loan.SetInterestRate();
+                    loan.SetAssessmentRate();
 
-            Console.WriteLine("         You have entered an invalid option!");
-            Console.WriteLine("         Please selected between 1 and 2 only");
+                    Step4(applicant, loan);
+                    Step5(applicant);
 
+                    break;
+
+                }
+
+                else
+                {
+
+                    Console.WriteLine("         You have entered an invalid option!");
+                    Console.WriteLine("         Please selected between 1 and 2 only");
+                    Console.Write("     Is this a (1) house to live-in or an (2) investment property? : ");
+
+                }
+
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please select between 1 and 2 only");
+                Console.Write("     Is this a (1) house to live-in or an (2) investment property? : ");
+            
+            }
+        
        }
        
 
@@ -258,7 +461,7 @@ class Program
        else
        {
 
-            Console.WriteLine($"SORRY! Your NDI ratio is {formattedRatio}:1.");
+            Console.WriteLine($"SORRY! Your NDI ratio is {ratio}:1.");
             Console.WriteLine($"You are not eligible to take out a loan of ${loan.GetPrincipal()}.");
        }
 
@@ -382,4 +585,95 @@ class Program
         PauseSpinner(5);
 
     }
+
+    static int DisplayBaseIncomeQuestion(int baseIncome, string type)
+    {
+        
+        string incomeType = type;
+        
+        Console.Write($"     What is your {incomeType} annual income? : ");
+            
+        while(baseIncome < 0)
+            
+        {
+            try 
+            {
+               
+                baseIncome = int.Parse(Console.ReadLine());
+                
+                if(baseIncome >= 0)
+                {
+                    break;
+                }
+
+                else
+                {
+                    Console.WriteLine("         You cannot have a negative base income!");
+                    Console.WriteLine("         Please input an income equal or higher than 0");
+                     Console.Write($"     What is your {incomeType} annual income? : ");
+                
+                }
+
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                 Console.Write($"     What is your {incomeType} annual income? : ");
+            
+            }
+
+        }
+
+        return baseIncome;
+
+
+    }
+
+    static int DisplayCreditLimitQuestion(int creditLimit, string type)
+    {
+        
+        string description = type;
+        
+        Console.Write($"     What is your {description} credit card limit? - enter 0 if none : ");
+            
+        while(creditLimit < 0)
+            
+        {
+            try 
+            {
+               
+                creditLimit = int.Parse(Console.ReadLine());
+                
+                if(creditLimit >= 0)
+                {
+                    break;
+                }
+
+                else
+                {
+                    Console.WriteLine("         You cannot have a negative credit limit!");
+                    Console.WriteLine("         Please input a limit equal or higher than 0");
+                    Console.Write($"     What is your {description} credit card limit? - enter 0 if none : ");
+                
+                }
+
+            }
+
+            catch(FormatException)
+            {
+                Console.WriteLine("         Invalid input. Please enter a valid integer.");
+                Console.Write($"     What is your {description} credit card limit? - enter 0 if none : ");
+            
+            }
+
+        }
+
+        return creditLimit;
+
+
+    }
+
+
+
 }

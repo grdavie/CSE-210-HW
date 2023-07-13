@@ -2,7 +2,7 @@ using System;
 
 public class OwnerOccupied : Loan 
 {
-    public OwnerOccupied(int securityValue, int depositAmount, int loanTerm)
+    public OwnerOccupied(double securityValue, double depositAmount, int loanTerm)
     : base(securityValue, depositAmount, loanTerm)
     {
         //same constructor as base class

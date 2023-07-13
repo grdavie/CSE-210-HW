@@ -3,7 +3,7 @@ using System;
 
 public class Investment : Loan
 {
-    public Investment(int securityValue, int depositAmount, int loanTerm)
+    public Investment(double securityValue, double depositAmount, int loanTerm)
     : base(securityValue, depositAmount, loanTerm)
     {
         //same constructor as base class
