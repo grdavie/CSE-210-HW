@@ -15,7 +15,9 @@ public class Person
 
     public void DisplayContactDetails() //display base class information
     {
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"{_name} | {_phoneNumber} | {_emailAddress}");
+        Console.ResetColor();
 
     }
 }

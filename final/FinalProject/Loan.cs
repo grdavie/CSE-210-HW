@@ -95,8 +95,12 @@ public abstract class Loan
         Console.WriteLine($"     > LVR: {LVR}%");
         Console.WriteLine($"     > Loan Term: {_loanTerm} months ({_loanTerm/12} yrs)");
         Console.WriteLine($"     > Applicable Interest Rate: {formattedInterest}%");
-        Console.WriteLine($"     > Indicative Monthly Repayment: ${repayment}");
+        Console.WriteLine($"     > Indicative Monthly Repayment: ${repayment}^");
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine($"\n^ - The calculated indicative monthly repayment is based on an assessment rate of {_assessmentRate * 100}%");
+        Console.ResetColor();
       
-        //assessment rate does not need to be disclosed
+        
     }
 }
